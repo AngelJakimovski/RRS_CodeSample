@@ -1,0 +1,18 @@
+﻿@model AARP.Services.Emails.NotificationOfErrorEmail
+
+@{
+    var urlHangFireFaildJobs = Request.Url.Scheme + "/hangfire/failed";
+}
+
+To: @Model.To
+From: internal@scopicsoftware.com
+Subject: The RecruiterBox Tools was failed to proccess a background job after several retries
+
+Hello,
+
+Background job #@Model.HangfireContext.JobId (@Model.HangfireContext.Job.Method) was failed with an exception. 
+Please click on the following link to get access to the job details: @urlHangFireFaildJobs
+
+Exception message: @((Model.HangfireContext.NewState as Hangfire.States.FailedState).Exception.Message)
+
+Please don’t reply to this email.

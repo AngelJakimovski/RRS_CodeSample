@@ -1,0 +1,435 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.tal-left {
+    text-align: left;
+}
+
+.tal-right {
+    text-align: right;
+}
+
+.tal-center {
+    text-align: center;
+}
+/* stats, standings */
+/*.stats{
+
+}*/
+
+.stats .date-filter,
+.standings .date-filter {
+    margin-top: 26px;
+}
+
+.date-filter input {
+    width: 100px;
+}
+
+/* survey */
+.survey p.survey-variant {
+    margin: 0;
+}
+
+.survey label {
+    margin-left: 3px;
+}
+
+.survey .survey-variant label {
+    font-weight: normal;
+}
+
+.survey .rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+    .survey .rating > .glyphicon {
+        display: inline-block;
+        position: relative;
+        width: 1.1em;
+    }
+
+        .survey .rating > .glyphicon:hover:before,
+        .survey .rating > .glyphicon:hover ~ .glyphicon:before,
+        .survey .rating > .glyphicon.active:before,
+        .survey .rating > .glyphicon.active ~ .glyphicon:before {
+            content: "\e006";
+        }
+
+.st-attitude-general {
+    width: 200px;
+    background: #fff;
+    padding: 10px 0 0 10px;
+}
+
+    .st-attitude-general .attitude {
+        width: 150px;
+        display: inline-block;
+    }
+
+.st-attitude-stage {
+    width: 175px;
+}
+
+    .st-attitude-stage .st-attitude-general {
+        width: 175px;
+    }
+
+    .st-attitude-stage .attitude {
+        width: 120px;
+        display: inline-block;
+    }
+
+.st-attitude-general .st-positive,
+.st-attitude-general .st-neutral,
+.st-attitude-general .st-negative {
+    height: 12px;
+}
+
+.st-positive {
+    background: green;
+}
+
+.p-positive {
+    color: green;
+}
+.p-neutral {
+    color: grey;
+}
+.p-negative {
+    color: red;
+}
+
+.st-neutral {
+    background: grey;
+}
+.st-negative {
+    background: red;
+}
+
+.st-positive,
+.st-neutral,
+.st-negative {
+    height: 10px;
+    display: inline-block;
+}
+
+#standings-info .st-positive,
+#standings-info .st-neutral,
+#standings-info .st-negative {
+    height: 10px;
+}
+
+#standings-info .p-positive,
+#standings-info .p-neutral,
+#standings-info .p-negative {
+    font-weight: 600;
+}
+
+.at-rating {
+    font-size: 12px;
+}
+
+.st-stage .attitude {
+    max-width: 150px;
+    display: inline-block;
+    width: 150px;
+}
+
+.general-performance .rating{
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+}
+
+.general-performance .attitude {
+    max-width: 150px;
+    display: inline-block;
+    width: 150px;
+}
+
+.general-performance .rating-count {
+    margin: 0;
+    font-weight: bold;
+    text-align: center;
+    font-size: 12px;
+}
+
+.general-performance .rating-percentage {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.general-performance .arrow-up {
+    background-image: url(images/arrow-up.png);
+}
+
+.general-performance .arrow-down {
+    background-image: url('images/arrow-down.png');
+}
+
+.general-performance .arrow-up,
+.general-performance .arrow-down {
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 36px;
+    display: inline-block;
+}
+
+.general-performance h2,
+.general-performance h3 {
+    margin-top:5px;
+    margin-bottom:3px;
+}
+.interviewers {
+        margin-top: 5px;
+    }
+
+.interviewers .standing-item {
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-bottom: 20px;
+}
+    .interviewers .standing-item .interviwer-name {
+        background: #ececec;
+        border: 2px solid #ececec;
+        padding-left: 10px;
+        width: 200px;
+    }
+    
+    .interviewers .standing-item.is_active .interviwer-name {
+        border-top: 2px solid red;
+        border-left: 2px solid red;
+        border-bottom: 2px solid red;
+    }
+
+    .interviewers .standing-item .interviwer-rating {
+        margin-left: -7px;
+        border: 2px solid #ececec;
+        width: calc(90% - 200px);
+    }
+
+    .interviewers .standing-item.is_active .interviwer-rating {
+        border: 2px solid red;
+    }
+
+    .interviewers .standing-item .compare {
+        display:none;
+    }
+
+    .interviewers .standing-item.is_active .compare {
+        display: block;
+        position: absolute;
+        left: 48%;
+        margin-top: -10px;
+        background: red;
+        border-radius: 4px;
+        padding: 0 10px 0 10px;
+        color: #fff;
+    }
+
+.equal {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
+
+.caret.caret-up {
+    border-top: none;
+    border-bottom: 4px solid #337ab7;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.d-inline {
+        display: inline;
+    }
+
+.d-ib {
+    display: inline-block;
+}
+
+.va-top{
+    vertical-align:top;
+}
+
+.pos-r {
+    position: relative;
+}
+
+.interviewers th.rating-stars {
+    padding-top: 35px;
+}
+
+.interviewers .table {
+    margin-bottom: 0px;
+    background: #ececec;
+}
+
+    .interviewers .table td {
+        border: none;
+    }
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.fs-20 {
+    font-size: 20px;
+}
+
+.fl-right {
+    float: right;
+}
+
+.fl-left {
+    float:left;
+}
+
+.date-filter-input {
+    width: 90px;
+}
+
+.filter-block {
+    background: #ececec;
+    padding: 0;
+}
+
+    .filter-block table {
+        margin-bottom: 0px;
+    } 
+
+    .filter-block p {
+        margin: 0;
+    }
+
+    .filter-block label {
+        font-weight: 400;
+    }
+
+.interviewer-info {
+    display: none;
+}
+
+    .interviewer-info.active {
+        display: block;
+    }
+
+    .interviewer-info .feedback-comment {
+        width: 90%;
+    }
+
+    .interviewer-info ::-webkit-input-placeholder {
+        font-style: italic;
+    }
+
+    .interviewer-info ::-moz-placeholder {
+        font-style: italic;
+    }
+
+    .interviewer-info ::-ms-input-placeholder {
+        font-style: italic;
+    }
+
+/* datatables*/
+.dataTable .even {
+    background: #ececec;
+}
+
+.dataTable .feedback {
+    border: 1px solid #1F7DE6;
+    margin: 5px 0 5px;
+}
+    .dataTable .feedback td:first-child {
+        padding-left: 20px;
+    }
+
+    .dataTable .feedback td {
+        padding-left: 5px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .dataTable .feedback .details-control {
+        font-color: #1F7DE6;
+    }
+
+.dataTable.stretched td {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+    .dataTable.stretched td:first-child {
+        padding-left: 10px;
+    }
+
+.dataTable.default-header thead tr {
+    height: 30px;
+    background: #ececec;
+}
+
+@media (max-width: 1024px) {
+    .interviewers .standing-item .interviwer-rating {
+        width: auto;
+    }
+
+    .general-stats {
+        margin-bottom: 5px;
+    }
+}
+
+@media (min-width: 768px) {
+    .survey .rating {
+        padding-top: 7px;
+    }
+
+    .survey .control-label {
+        text-align: inherit;
+    }
+}
+
+@media (max-width: 425px) {
+    .btn-action {
+        margin-top: 5px;
+    }
+}

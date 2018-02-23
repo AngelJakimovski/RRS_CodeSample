@@ -1,0 +1,17 @@
+﻿@model AARP.Services.Emails.NotificationOfNewReferralEmail
+
+@{
+    var reviewUrl = string.Format("https://scopicsoftware.recruiterbox.com/app/#candidates/list/all/view:{0}/", @Model.Applicant.CandidateId);
+}
+
+To: @Model.SendTo
+From: internal@scopicsoftware.com
+Subject: [RecruiterBox] New referal applicant created for job "@Model.Job.Name"
+
+Hello,
+
+@Model.Applicant.CandidateName has been referred for the job - "@Model.Job.Name". Click on the link below to get access to the candidate's CV.
+
+@reviewUrl
+
+Please don’t reply to this email.

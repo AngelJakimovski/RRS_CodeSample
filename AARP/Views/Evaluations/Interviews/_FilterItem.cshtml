@@ -1,0 +1,14 @@
+﻿@model List<InterviewFilterItem>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+    <p>
+        <input type="checkbox" value="@item.Id" id="f-@ViewData["type"]-@item.Id" class="filter-check" f-type="@ViewData["type"]" />
+        <label for="f-@ViewData["type"]-@item.Id">@item.Value</label>
+        <b class="fl-right">@item.Count</b>
+    </p>
+    }
+
+}

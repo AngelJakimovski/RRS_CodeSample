@@ -1,0 +1,18 @@
+﻿
+<table class="table table-responsive">
+    <tr>
+        <td>
+            <strong>Interviews</strong>
+            @Html.Partial("Interviews/_FilterItem", (List<InterviewFilterItem>)ViewBag.Stages, new ViewDataDictionary() { { "type", "stage" } })
+            <strong>Total number: @ViewBag.TotalNumber</strong>
+        </td>
+        <td>
+            <strong>Seniority</strong>
+            @Html.Partial("Interviews/_FilterItem", (List<InterviewFilterItem>)ViewBag.Seniorities, new ViewDataDictionary() { { "type", "seniority" } })
+        </td>
+        <td>
+            <strong>Technology</strong>
+            @Html.Partial("Interviews/_FilterItem", (List<InterviewFilterItem>)ViewBag.Technologies, new ViewDataDictionary() { { "type", "technology" } })
+        </td>
+    </tr>
+</table>

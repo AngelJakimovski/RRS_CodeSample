@@ -1,0 +1,176 @@
+﻿@model List<AARP.Models.AdminSettingsViewModel>
+
+@{
+    Layout = "~/Views/Shared/_EvaluationsLayout.cshtml";
+    ViewBag.Title = "Admin";
+    var message = TempData["Message"] as AARP.Models.MessageViewModel;
+}
+<div class="row">
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <h2>@Html.Partial("_PreviousPage")Admin @Html.Partial("_SharePage")@Html.Partial("_PrintPdf")</h2>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+    </div>
+</div>
+@*<p>
+        <a id="btn-update" class="btn btn-primary" href="javascript:void()">Update Applicants</a>
+    </p>*@
+
+@if (message != null)
+{
+    <div class='alert @(message.Type== AARP.Models.MessageType.Success?"alert-success":"alert-info") alert-dismissible fade in' role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <strong>@message.Title !</strong> @message.Content
+    </div>
+}
+
+
+@using (Html.BeginForm("SaveSettings", "Evaluations", FormMethod.Post, new { id = "admin-form" }))
+{
+    <div class="form-horizontal">
+
+        <div class="survey">
+            @foreach (var setting in Model)
+            {
+                <h4>Tech Interview @setting.Id</h4>
+                <hr />
+                <div class="form-group form-inline">
+                    @Html.LabelFor(m => setting.EmailTimer, htmlAttributes: new { @class = "control-label col-md-8" })
+                    <div class="col-md-5">
+                        <p class="survey-variant">
+                            @if (setting.EmailTimer == 1)
+                            {
+                                <input type="radio" value="1" name="@string.Format(@"EmailTimer{0}",setting.Id)" id="@string.Format(@"EmailTimer-{0}-1",setting.Id)" checked="checked" />
+                            }
+                            else
+                            {
+                                <input type="radio" value="1" name="@string.Format(@"EmailTimer{0}",setting.Id)" id="@string.Format(@"EmailTimer-{0}-1",setting.Id)" />
+                            }
+                            <label for="@string.Format(@"EmailTimer-{0}-1",setting.Id)">After 1 hour</label>
+                        </p>
+                        <p class="survey-variant">
+                            @if (setting.EmailTimer == 3)
+                            {
+                                <input type="radio" value="3" name="@string.Format(@"EmailTimer{0}",setting.Id)" id="@string.Format(@"EmailTimer-{0}-1",setting.Id)" checked="checked" />
+                            }
+                            else
+                            {
+                                <input type="radio" value="3" name="@string.Format(@"EmailTimer{0}",setting.Id)" id="@string.Format(@"EmailTimer-{0}-1",setting.Id)" />
+                            }                            <label for="@string.Format(@"EmailTimer-{0}-3", setting.Id)">After 3 hours</label>
+                        </p>
+                        <p class="survey-variant">
+                            @if (setting.EmailTimer == 8)
+                            {
+                                <input type="radio" value="8" name="@string.Format(@"EmailTimer{0}",setting.Id)" id="@string.Format(@"EmailTimer-{0}-1",setting.Id)" checked="checked" />
+                            }
+                            else
+                            {
+                                <input type="radio" value="8" name="@string.Format(@"EmailTimer{0}",setting.Id)" id="@string.Format(@"EmailTimer-{0}-1",setting.Id)" />
+                            }                            <label for="@string.Format(@"EmailTimer-{0}-8", setting.Id)">After 8 hours</label>
+                        </p>
+                        <p class="survey-variant">
+                            @if (setting.EmailTimer == 24)
+                            {
+                                <input type="radio" value="24" name="@string.Format(@"EmailTimer{0}",setting.Id)" id="@string.Format(@"EmailTimer-{0}-1",setting.Id)" checked="checked" />
+                            }
+                            else
+                            {
+                                <input type="radio" value="24" name="@string.Format(@"EmailTimer{0}",setting.Id)" id="@string.Format(@"EmailTimer-{0}-1",setting.Id)" />
+                            }                            <label for="@string.Format(@"EmailTimer-{0}-24", setting.Id)">After 24 hours</label>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => setting.FeedbackMessage, htmlAttributes: new { @class = "control-label col-md-8" })
+                    <div class="col-md-5">
+                        @Html.TextArea(string.Format(@"FeedbackMessage{0}", setting.Id), setting.FeedbackMessage, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group form-inline">
+                    @Html.LabelFor(m => setting.EnableReminder, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @if (setting.EnableReminder > 0)
+                    {
+                        <input type="checkbox" name="@string.Format(@"ReminderCheck{0}",setting.Id)" id="@string.Format(@"Reminder-{0}-Check",setting.Id)" value="1" class="reminder-check" checked="checked" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="@string.Format(@"ReminderCheck{0}",setting.Id)" id="@string.Format(@"Reminder-{0}-Check",setting.Id)" value="1" class="reminder-check" />
+                    }
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @if (setting.EnableReminder == 1)
+                        {
+                            <input type="radio" value="1" name="@string.Format(@"Reminder{0}",setting.Id)" id="@string.Format(@"Reminder-{0}-1",setting.Id)" checked="checked" class="@string.Format(@"Reminder-{0}-Check",setting.Id)" /><label for="@string.Format(@"Reminder-{0}-1",setting.Id)">After 1 day</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="1" name="@string.Format(@"Reminder{0}",setting.Id)" id="@string.Format(@"Reminder-{0}-1",setting.Id)" class="@string.Format(@"Reminder-{0}-Check",setting.Id)" /><label for="@string.Format(@"Reminder-{0}-1",setting.Id)">After 1 day</label>
+                        }
+                        @if (setting.EnableReminder == 3)
+                        {
+                            <input type="radio" value="3" name="@string.Format(@"Reminder{0}",setting.Id)" id="@string.Format(@"Reminder-{0}-3",setting.Id)" checked="checked" class="@string.Format(@"Reminder-{0}-Check",setting.Id)" /><label for="@string.Format(@"Reminder-{0}-1",setting.Id)">After 3 days</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="3" name="@string.Format(@"Reminder{0}",setting.Id)" id="@string.Format(@"Reminder-{0}-3",setting.Id)" class="@string.Format(@"Reminder-{0}-Check",setting.Id)" /><label for="@string.Format(@"Reminder-{0}-1",setting.Id)">After 3 days</label>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => setting.ReminderMessage, htmlAttributes: new { @class = "control-label col-md-8" })
+                    <div class="col-md-5">
+                        @Html.TextArea(string.Format(@"ReminderMessage{0}", setting.Id), setting.ReminderMessage, new { @class = "form-control" })
+                    </div>
+                </div>
+                <br />
+            }
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Send" id="SaveSettings" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script src="~/Scripts/bootstrap-switch.js"></script>
+    <script type="text/javascript">
+        $(".reminder-check").bootstrapSwitch();
+        $(document).ready(function () {
+            $(".reminder-check").each(function () {
+                if (this.checked) {
+                    var select = $(this);
+                    var Id = select.attr('id');
+                    var newID = Id.split('-')[1];
+                    $("." + Id).removeAttr('disabled');
+                }
+                else {
+                    var select = $(this);
+                    var Id = select.attr('id');
+                    $("." + Id).attr('disabled', 'disabled');
+                }
+            });
+        });
+        $(".reminder-check").on('switchChange.bootstrapSwitch', function (event, state) {
+            if (this.checked) {
+                var select = $(this);
+                var Id = select.attr('id');
+                var newID = Id.split('-')[1];
+                $("INPUT[name=Reminder" + newID + "]").val(['1']);
+                $("." + Id).removeAttr('disabled');
+            }
+            else {
+                var select = $(this);
+                var Id = select.attr('id');
+                $("." + Id).attr('disabled', 'disabled');
+            }
+        });
+    </script>
+
+}

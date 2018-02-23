@@ -1,0 +1,318 @@
+﻿@model AARP.Models.AppConfigurationsViewModel
+@{
+    ViewBag.Title = "Configurations";
+
+    List<SelectListItem> checkingInterValItems = new List<SelectListItem>();
+    checkingInterValItems.Add(new SelectListItem()
+    {
+        Text = "Hourly - Every weekday",
+        Value = "0 * * * 1-5",
+    });
+    checkingInterValItems.Add(new SelectListItem()
+    {
+        Text = "Every 2 hours - On weekdays",
+        Value = "0 */2 * * 1-5",
+    });
+    checkingInterValItems.Add(new SelectListItem()
+    {
+        Text = "Every 6 hours - On weekdays",
+        Value = "0 */6 * * 1-5",
+    });
+    checkingInterValItems.Add(new SelectListItem()
+    {
+        Text = "Every 12 hours - On weekdays",
+        Value = "0 */12 * * 1-5",
+    });
+    checkingInterValItems.Add(new SelectListItem()
+    {
+        Text = "Every weekday",
+        Value = "0 0 * * 1-5",
+    });
+    checkingInterValItems.Add(new SelectListItem()
+    {
+        Text = "Every Monday",
+        Value = "0 0 * * 1",
+    });
+    checkingInterValItems.Add(new SelectListItem()
+    {
+        Text = "Every 3 mins (for test only)",
+        Value = "*/3 * * * *",
+    });
+    checkingInterValItems.Add(new SelectListItem()
+    {
+        Text = "Every 5 mins (for test only)",
+        Value = "*/5 * * * *",
+    });
+    checkingInterValItems.Add(new SelectListItem()
+    {
+        Text = "Every 15 mins (for test only)",
+        Value = "*/15 * * * *",
+    });
+
+    List<SelectListItem> delayTimeItems = new List<SelectListItem>();
+    delayTimeItems.Add(new SelectListItem()
+    {
+        Text = "1 day",
+        Value = new TimeSpan(1, 0, 0, 0).ToString(),
+    });
+    delayTimeItems.Add(new SelectListItem()
+    {
+        Text = "2 days",
+        Value = new TimeSpan(2, 0, 0, 0).ToString(),
+    });
+    delayTimeItems.Add(new SelectListItem()
+    {
+        Text = "3 days",
+        Value = new TimeSpan(3, 0, 0, 0).ToString(),
+    });
+    delayTimeItems.Add(new SelectListItem()
+    {
+        Text = "1 week",
+        Value = new TimeSpan(7, 0, 0, 0).ToString(),
+    });
+    delayTimeItems.Add(new SelectListItem()
+    {
+        Text = "5 mins (for test)",
+        Value = new TimeSpan(0, 0, 5, 0).ToString(),
+    });
+    delayTimeItems.Add(new SelectListItem()
+    {
+        Text = "10 mins (for test)",
+        Value = new TimeSpan(0, 0, 10, 0).ToString(),
+    });
+
+    var daysOfWeeks = Enum.GetValues(typeof(DayOfWeek)) as DayOfWeek[];
+    var message = TempData["Message"] as AARP.Models.MessageViewModel;
+    var checkMessage = TempData["CheckMessage"] as AARP.Models.MessageViewModel;
+}
+
+<div class="page-header">
+    <h2>@Html.Partial("_PreviousPage")Common Configurations</h2>
+    @if (message != null)
+    {
+        <div class="alert alert-success alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <strong>@message.Title</strong> @message.Content
+        </div>
+    }
+</div>
+
+@using (Html.BeginForm("Index", "Configuration", FormMethod.Post, new { @class = "form form-horizontal" }))
+{
+
+    <h4>Commons</h4>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Commons.EnabledDays, "Working days", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.CheckBoxListFor(m => m.Commons.EnabledDays, daysOfWeeks.Select(day => new SelectListItem() { Text = " " + day.ToString(), Value = day.ToString() }), new { @class = "col-md-3" })
+            @Html.ValidationMessageFor(model => model.DistributingApplicants.IsEnabled)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Working hours</label>
+        <div class="col-md-10">
+            <div class="input-group">
+                <span class="input-group-addon">From</span>
+                @Html.TextBoxFor(model => model.Commons.StartTimeOfDay, new { @type = "time", @class = "form-control" })
+                <span class="input-group-addon">To</span>
+                @Html.TextBoxFor(model => model.Commons.EndTimeOfDay, new { @type = "time", @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Checking new applications -->
+    <h4>Checking/Distributing new job applications applied</h4>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DistributingApplicants.IsEnabled, "Is Enabled", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.CheckBoxFor(model => model.DistributingApplicants.IsEnabled, new { @class = "" })
+            @Html.ValidationMessageFor(model => model.DistributingApplicants.IsEnabled)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DistributingApplicants.Recurrence, "Checking Interval", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(model => model.DistributingApplicants.Recurrence, checkingInterValItems, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DistributingApplicants.Recurrence)
+        </div>
+    </div>
+
+    <hr />
+
+    <h4>Report Referrals to Specific Emails</h4>
+    <div class="form-group">
+        @Html.LabelFor(m => m.HandlingReferrals.IsEnabled, "Is Enabled", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.CheckBoxFor(model => model.HandlingReferrals.IsEnabled, new { @class = "" })
+            @Html.ValidationMessageFor(model => model.HandlingReferrals.IsEnabled)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HandlingReferrals.ReportToEmails, "Report To", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.HandlingReferrals.ReportToEmails, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.HandlingReferrals.ReportToEmails)
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Update application status -->
+    <h4>Update Status of job applications assigned to reviewers</h4>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RefresingAssignedApplicants.IsEnabled, "Is Enabled", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.CheckBoxFor(model => model.RefresingAssignedApplicants.IsEnabled, new { @class = "" })
+            @Html.ValidationMessageFor(model => model.RefresingAssignedApplicants.IsEnabled)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RefresingAssignedApplicants.Recurrence, "Checking Interval", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(model => model.RefresingAssignedApplicants.Recurrence, checkingInterValItems, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RefresingAssignedApplicants.Recurrence)
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Remind reviewers -->
+    <h4>Remind Reviewers</h4>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RemindingReviewers.IsEnabled, "Is Enabled", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.CheckBoxFor(model => model.RemindingReviewers.IsEnabled, new { @class = "" })
+            @Html.ValidationMessageFor(model => model.RemindingReviewers.IsEnabled)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RemindingReviewers.DelayTime, "Delay Time", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(model => model.RemindingReviewers.DelayTime, delayTimeItems, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RemindingReviewers.DelayTime)
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Escalate applications -->
+     <!-- Remind reviewers -->
+    <h4>Escalate timeout unhandled applications</h4>
+    <div class="form-group">
+        @Html.LabelFor(m => m.EscalatingTimeOutApplicants.IsEnabled, "Is Enabled", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.CheckBoxFor(model => model.EscalatingTimeOutApplicants.IsEnabled, new { @class = "" })
+            @Html.ValidationMessageFor(model => model.EscalatingTimeOutApplicants.IsEnabled)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EscalatingTimeOutApplicants.RemindTheshold, "Escalate After number of reminds", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.EscalatingTimeOutApplicants.RemindTheshold, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.EscalatingTimeOutApplicants.RemindTheshold)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EscalatingTimeOutApplicants.ReportToEmails, "Escalate To", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.EscalatingTimeOutApplicants.ReportToEmails, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.EscalatingTimeOutApplicants.ReportToEmails)
+        </div>
+    </div>
+
+    <hr />
+    <h4>RecruiterBox settings</h4>
+    <div class="alert alert-dismissible fade in hidden" role="alert" id="connMessage">       
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RecruiterBox.Login, "RecruiterBox Login", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.RecruiterBox.Login, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RecruiterBox.Login)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.RecruiterBox.Password, "RecruiterBox Password", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.RecruiterBox.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RecruiterBox.Password)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="btn-checkConn" type="button" class="btn btn-toolbar" onclick="CheckConnection()">Check Connection</button>
+        </div>
+    </div>    
+
+    <hr />
+
+    <h4>Report errors</h4>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReportingErrors.IsEnabled, "Is Enabled", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.CheckBoxFor(model => model.ReportingErrors.IsEnabled, new { @class = "" })
+            @Html.ValidationMessageFor(model => model.ReportingErrors.IsEnabled)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReportingErrors.ReportToEmails, "Report To", new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.ReportingErrors.ReportToEmails, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ReportingErrors.ReportToEmails)
+        </div>
+    </div>
+
+    
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </div>
+}
+
+<script>
+    function CheckConnection()
+    {
+        $('#btn-checkConn').after('<div class="alert alert-info" style="margin: 2px"><img src="@Url.Content("~/Content/Images/iWaiting.gif")" />Please wait for a while...</div>');
+        var login = $("#RecruiterBox_Login").val();
+        var password = $("#RecruiterBox_Password").val();
+        var credentials = { login: login, password: password };
+
+        $.ajax({
+            type: "POST",
+            url: '/Configuration/CheckConnection',
+            data: credentials,
+            dataType: 'json'
+        }).then(function (result) {
+            if (result.Type == 0) {
+                $('#connMessage').removeClass('alert-danger');
+                $('#connMessage').addClass('alert-success');
+            }
+            else {
+                $('#connMessage').removeClass('alert-success');
+                $('#connMessage').addClass('alert-danger');
+            }
+
+            $('#connMessage').empty();
+            $('#connMessage').append("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button>");            
+            $('#connMessage').append("<strong>" + result.Title + "</strong> " + result.Content);
+            $('#connMessage').removeClass('hidden');
+
+            $('#btn-checkConn').parent().find($('.alert')).remove();
+
+        });
+    }
+</script>
+

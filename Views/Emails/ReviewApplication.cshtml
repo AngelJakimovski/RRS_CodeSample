@@ -1,0 +1,18 @@
+﻿@model AARP.Services.Emails.ReviewApplicationEmail
+@{
+    var reviewUrl = string.Format("https://scopicsoftware.recruiterbox.com/app/#candidates/list/all/view:{0}/", @Model.JobApplication.CandidateId);
+}
+
+To: @Model.Reviewer.Email
+From: internal@scopicsoftware.com
+Subject: Applicant review needed - @Model.Job.Name
+
+Hello @Model.Reviewer.Name,
+
+We need you to review a new applicant for this job - "@Model.Job.Name". Click on the link below to get access to the candidate's CV.
+
+After reviewing the candidate's CV either advance the applicant to the next stage or reject the applicant.
+
+@reviewUrl
+
+Please don’t reply to this email.

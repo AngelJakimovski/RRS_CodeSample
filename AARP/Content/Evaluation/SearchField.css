@@ -1,0 +1,115 @@
+﻿.search-field {
+    width: 200px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: 228px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.show {
+    display: block;
+}
+
+#resultTable {
+    width: 100%;
+}
+
+#resultTable td {
+    padding: 5px;
+    background-color: #EAECEE;
+    border-bottom: 1px solid #D6DBDF;
+}
+
+.interviewer-name {
+    width: 90%;
+}
+
+#btnSearchInterview, #btnCompareInterview {
+    padding: 3px 18px !important;
+}
+
+#searchResultPanel {
+    border: 1px solid #D5D8DC;
+}
+
+#submitTable {
+    width: 100%;
+}
+
+#submitTable td {
+    padding: 5px;
+    background-color: #EAECEE;
+    border-bottom: 1px solid #D6DBDF;
+}
+#recordPanel {
+    max-height: 100px;
+    overflow-y: scroll;
+}
+#dropdown {
+    margin-top: 27px !important;
+}
+
+.search-icon {
+    border: 1px solid #CCC;
+    border-right: none;
+    border-width: 2px !important;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+    color: #CCC !important;
+}
+#txtSearchField {
+    border-style: solid !important;
+    border-left: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border-width: 2px !important;
+    border-color: #CCC !important;
+    outline-width: 0 !important;
+}
+
+.ui-autocomplete {
+    max-height: 130px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+/* IE 6 doesn't support max-height
+   * we use height instead, but this forces the menu to always be this tall
+   */
+* html .ui-autocomplete {
+    height: 130px;
+}
+.ui-menu-item {
+    background-color: #EAECEE;
+    border-bottom: 1px solid #D6DBDF;
+}
+#tableButtons {
+    width: 225px;
+    position: absolute;
+    display: none;
+    top: 100px;
+    z-index: 1000;
+}

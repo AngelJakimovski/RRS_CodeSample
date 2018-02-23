@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Test";
+    var message = TempData["Message"] as AARP.Models.MessageViewModel;
+}
+
+<h2>Test</h2>
+
+@if (message != null)
+{
+    <div class='alert @(message.Type== AARP.Models.MessageType.Success?"alert-success":"alert-info") alert-dismissible fade in' role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <strong>@message.Title !</strong> @message.Content
+    </div>
+}
+
+@using (Html.BeginForm("RunFailedJob", "Test", FormMethod.Post, new { }))
+{
+    <button class="btn btn-default">Run a failed job</button>
+}

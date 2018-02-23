@@ -1,0 +1,14 @@
+﻿@Scripts.Render("~/Scripts/print.min.js")
+<a href="#" class="printPdf" id="printPDF2" onclick="printJS('body', 'html');"><img src="~/Content/Images/icon-pdf.png" width="23" height="23"></a>
+<script>
+    $(document).ready(function () {
+    $("#printPDF2").click(function () {
+        alert('Success');
+        $.ajax({
+            url: "ConvertThisPageToPdf?page=" + window.location.href, success: function (result) {
+
+            }
+        });
+        });
+    })
+</script>

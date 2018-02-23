@@ -1,0 +1,271 @@
+﻿@model AARP.Models.Evaluations.StatsViewModel
+@{
+    var dateFrom = (DateTime)ViewBag.DateFrom;
+    var dateTo = (DateTime)ViewBag.DateTo;
+    int counter = 1;
+    int counterPanes = 1;
+}
+
+<div id="body">
+    <div class="container">
+        <div class="row text-center">
+            <a class="" id="toggleInterview" data-toggle="collapse" data-target="#collapseInterviewGraph" aria-controls="collapseInterviewGraph">
+                <i class="servicedrop fa fa-arrow-up fa-2x"></i>
+            </a>
+        </div>
+        <div class="row">
+            <div class="collapse in" id="collapseInterviewGraph">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#All" data-toggle="tab">All</a>
+                    </li>
+                    <li>
+                        <a href="#Interview1" data-toggle="tab">Interview 1</a>
+                    </li>
+                    <li>
+                        <a href="#Interview2" data-toggle="tab">Interview 2</a>
+                    </li>
+                </ul>
+                <script src="~/Scripts/Chart.js"></script>
+                <script src="~/Scripts/Site.js"></script>
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="All">
+                        <canvas id="MultiLineChart" width="400" height="150"></canvas>
+                        <script>
+                            //----Line Chart---------
+                            var c = document.getElementById("MultiLineChart");
+                            var ctx = c.getContext("2d");
+                            var myLineChart = new Chart(ctx, {
+                                type: 'line',
+                                data: @(Html.Raw(JsonConvert.SerializeObject(ViewBag.MultiLineChart)))
+                            });
+                        </script>
+                    </div>
+                    <div class="tab-pane" id="Interview1">
+                        <canvas id="LineChart1" width="400" height="150"></canvas>
+                        <script>
+                            //----Line Chart 1---------
+                            var c = document.getElementById("LineChart1");
+                            var ctx = c.getContext("2d");
+                            var myLineChart = new Chart(ctx, {
+                                type: 'line',
+                                data: @(Html.Raw(JsonConvert.SerializeObject(ViewBag.LineChart1)))
+                            });
+                        </script>
+                    </div>
+                    <div class="tab-pane" id="Interview2">
+                        <canvas id="LineChart2" width="400" height="150"></canvas>
+                        <script>
+                            //----Line Chart 1---------
+                            var c = document.getElementById("LineChart2");
+                            var ctx = c.getContext("2d");
+                            var myLineChart = new Chart(ctx, {
+                                type: 'line',
+                                data: @(Html.Raw(JsonConvert.SerializeObject(ViewBag.LineChart2)))
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 container">
+                <div class="row"><h3>Top 5 Ranked Interviewers</h3></div>
+                <br />
+                <div class="row">
+                    <ul class="nav nav-tabs nav-stacked">
+
+                        @foreach (var interviewer in Model.body.Top5Interviewers)
+                        {
+                            <li class="@string.Format("{0}",counter==1?"active":"")">
+                                <a href="@string.Format("#{0}",counter)" data-toggle="tab">
+                                    @counter. @interviewer.Name
+                                    @for (var i = 0; i < 5; i++)
+                                    {
+                                        if (interviewer.AvgRating > i)
+                                        {
+                                            <i class="" glyphicon glyphicon-star""></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="" glyphicon glyphicon-star-empty""></i>
+                                        }
+                                    }
+                                </a>
+                            </li>
+                            counter++;
+                        }
+                    </ul>
+                </div>
+                <br />
+                <div class="row text-center">
+                    <a href="Standings" class="btn btn-primary btn-sm">View All Standings</a>
+                </div>
+            </div>
+            <div class="col-lg-9 container" style="background-color:lightgray;color:black">
+                <div class="tab-content clearfix">
+
+                    @*Create tabs for each of the Top 5 interviewers*@
+                    @foreach (var interviewer in Model.body.Top5Interviewers)
+                    {
+                        <div class="@string.Format("tab-pane {0}",counterPanes==1?"active":"")" id="@counterPanes">
+                            <div class="col-lg-4">
+                                <div class="row"><h3>Overall Performance</h3></div>
+                                <div class="row">
+                                    @*@for (var i = 0; i < 5; i++)
+                                    {
+                                        var ratingInfo = interviewer.InterviewStages != null ? interviewer.InterviewStages[0].FirstOrDefault(f => f. == 5 - i) : null;
+
+                                        <div>
+                                            <p class="rating-count">@(ratingInfo != null ? ratingInfo.RatingCount : 0 )</p>
+                                            <span class="rating-percentage">@(ratingInfo != null ? 100 * ratingInfo.RatingCount / 10 : 0 )%</span>
+                                            @Html.Partial("_RatingStars", (double)(5 - i))
+                                        </div>
+                                    }*@
+                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>10<br />
+                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>1<br />
+                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>0<br />
+                                    <i class="fa fa-star"></i><i class="fa fa-star"></i>0<br />
+                                    <i class="fa fa-star"></i>1<br />
+                                </div>
+                                <div class="row">
+                                    <canvas id="@string.Format("BarChart{0}",counterPanes)"></canvas>
+
+                                    <script src="~/Scripts/Chart.js"></script>
+                                    <script src="~/Scripts/Site.js"></script>
+                                    <script>
+                                        //-----Single Bar --------------
+                                        var c = document.getElementById('@string.Format("BarChart{0}", counterPanes)');
+                                    var ctx = c.getContext("2d");
+                                    var myBarChart = new Chart(ctx, {
+                                        type: 'horizontalBar',
+                                        data: @(Html.Raw(JsonConvert.SerializeObject(ViewBag.StatsHeaderBarChartData))),
+                                        options: {
+                                            legend: { display: false },
+                                            title: { display: false },
+                                            scales: {
+                                                xAxes: [{
+                                                    ticks: {
+                                                        beginAtZero: true
+                                                    }
+                                                }]
+                                            }
+                                        }
+                                    });
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <canvas id="@string.Format("SeniorityBarChart{0}",counterPanes)"></canvas>
+                                        <script>
+                                            //----Line Chart---------
+                                            var c = document.getElementById('@string.Format("SeniorityBarChart{0}", counterPanes)');
+                                        var ctx = c.getContext("2d");
+                                        var myLineChart = new Chart(ctx, {
+                                            type: 'pie',
+                                            data: @(Html.Raw(JsonConvert.SerializeObject(interviewer.SeniorityChart)))
+                                        });
+                                        </script>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <canvas id="@string.Format("StageBarChart{0}",counterPanes)"></canvas>
+                                        <script>
+                                            //----Line Chart---------
+                                            var c = document.getElementById('@string.Format("StageBarChart{0}", counterPanes)');
+                                        var ctx = c.getContext("2d");
+                                        var myLineChart = new Chart(ctx, {
+                                            type: 'pie',
+                                            data: @(Html.Raw(JsonConvert.SerializeObject(interviewer.StageChart)))
+                                        });
+                                        </script>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <canvas id="@string.Format("LengthBarChart{0}",counterPanes)"></canvas>
+                                        <script>
+                                            //----Line Chart---------
+                                            var c = document.getElementById('@string.Format("LengthBarChart{0}", counterPanes)');
+                                        var ctx = c.getContext("2d");
+                                        var myLineChart = new Chart(ctx, {
+                                            type: 'pie',
+                                            data: @(Html.Raw(JsonConvert.SerializeObject(interviewer.LengthChart)))
+                                        });
+                                        </script>
+                                    </div>
+                                    <div class="col-lg-6">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        counter++;
+                    }
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row"><h3>Interview Stats</h3></div>
+        <div class="row">
+            <div class="col-lg-4">
+                <canvas id="TotalRatingsBar"></canvas>
+                <script>
+                                        //----Line Chart---------
+                                        var c = document.getElementById("TotalRatingsBar");
+                                        var ctx = c.getContext("2d");
+                                        var myLineChart = new Chart(ctx, {
+                                            type: 'pie',
+                                            data: @(Html.Raw(JsonConvert.SerializeObject(ViewBag.OverallRating)))
+                                        });
+                </script>
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <canvas id="TotalSeniorityBar"></canvas>
+                        <script>
+                                        //----Pie Chart---------
+                                        var c = document.getElementById("TotalSeniorityBar");
+                                        var ctx = c.getContext("2d");
+                                        var myLineChart = new Chart(ctx, {
+                                            type: 'pie',
+                                            data: @(Html.Raw(JsonConvert.SerializeObject(ViewBag.OverallSeniority)))
+                                        });
+                        </script>
+                    </div>
+                    <div class="col-lg-6">
+                        <canvas id="TotalStageBar"></canvas>
+                        <script>
+                                        //----Pie Chart---------
+                                        var c = document.getElementById("TotalStageBar");
+                                        var ctx = c.getContext("2d");
+                                        var myLineChart = new Chart(ctx, {
+                                            type: 'pie',
+                                            data: @(Html.Raw(JsonConvert.SerializeObject(ViewBag.OverallStage)))
+                                        });
+                        </script>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <canvas id="TotalLengthBar"></canvas>
+                        <script>
+                                        //----Pie Chart---------
+                                        var c = document.getElementById("TotalLengthBar");
+                                        var ctx = c.getContext("2d");
+                                        var myLineChart = new Chart(ctx, {
+                                            type: 'pie',
+                                            data: @(Html.Raw(JsonConvert.SerializeObject(ViewBag.OverallLength)))
+                                        });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>

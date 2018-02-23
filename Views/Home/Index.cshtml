@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Hello, Welcome to Scopic Hiring Automation Tool!</h1>
+    @if (!Request.IsAuthenticated)
+    {
+        <h3>Please login to be able to config it...</h3>
+        <p><a class="btn btn-primary btn-lg" href="@Url.Action("Login","Account")" role="button">Login</a></p>
+    }
+</div>

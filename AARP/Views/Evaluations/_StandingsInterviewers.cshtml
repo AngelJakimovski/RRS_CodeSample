@@ -1,0 +1,76 @@
+﻿@model IEnumerable<StandingsInterviewersViewModel>
+@{
+    int count = 1;
+}
+<div class="interviewers table-responsive">
+    @foreach (var item in Model)
+    {
+        <div class="standing-item" data-index="@count" compare="false" interviewer-id="@item.InterviewerId">
+            <div class="d-ib va-top">
+                <div class="interviwer-name pos-r">
+                    <h3>@(string.Format("{0}. {1}", count, item.Name))</h3>
+                </div>
+                <div class="st-attitude-general">
+                    <p class="fs-20"><strong>@item.AvgRating.ToString("F1")</strong> @Html.Partial("_RatingStars", item.AvgRating)</p>
+                    @Html.Partial("_AttitudeRating", item.GeneralAttitude)
+
+                    <p class="tal-center">
+                        <a href="/evaluations/interviewer/@item.InterviewerId" class="btn btn-info">View Profile</a>
+                    </p>
+                </div>
+            </div>
+            <div class="interviwer-rating d-ib">
+                <table class="table">
+                    <tr>
+
+                        <th></th>
+                        @for (var i = 5; i >= 1; i--)
+                        {
+                            <th class="tal-center rating-stars">
+                                @Html.Partial("_RatingStars", (double)i)
+                            </th>
+                        }
+                        <th></th>
+                    </tr>
+                    @{ int stageCount = 0;}
+                    @foreach (var stage in item.InterviewStages)
+                    {
+                        <tr>
+
+                            <td class="st-attitude-stage">
+                                <p><strong>@stage.StageName</strong></p>
+                                @Html.Partial("_AttitudeRating", stage.AttitudeStat)
+                            </td>
+                            @{ var totalCount = stage.Ratings.Sum(s => s.RatingCount);}
+                            @for (var i = 5; i >= 1; i--)
+                            {
+                                var rating = stage.Ratings.FirstOrDefault(t => t.Rating == i);
+                                <td class="tal-center">
+                                    @if (rating == null)
+                                    {
+                                        <span>0</span>
+                                        <br />
+                                        <strong>0%</strong>
+                                    }
+                                    else
+                                    {
+                                        @rating.RatingCount
+                                        <br />
+                                        <strong>@((int)(100 * rating.RatingCount / totalCount))<span>%</span></strong>
+                                    }
+
+                                </td>
+                            }
+                            <td>
+                                <h4>@(((double)stage.Ratings.Sum(s => s.Rating * s.RatingCount) / totalCount).ToString("F1"))</h4>
+                            </td>
+                        </tr>
+                                    stageCount++;
+                     }
+                </table>
+                <a href="javascript:void(0)" class="compare">Compare</a>
+            </div>
+        </div>
+        count++;
+    }
+</div>

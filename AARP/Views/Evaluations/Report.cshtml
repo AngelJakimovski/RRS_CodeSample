@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AARP.Models.EvaluationsViewModel>
+
+@{
+    Layout = "~/Views/Shared/_EvaluationsLayout.cshtml";
+    ViewBag.Title = "Evaluations";
+    var message = TempData["Message"] as AARP.Models.MessageViewModel;
+}
+<div class="row">
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <h2>@Html.Partial("_PreviousPage")Report @Html.Partial("_SharePage")@Html.Partial("_PrintPdf")</h2>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        @Html.Partial("_SearchField")
+    </div>
+</div>
+@*<p>
+        <a id="btn-update" class="btn btn-primary" href="javascript:void()">Update Applicants</a>
+    </p>*@
+
+@if (message != null)
+{
+    <div class='alert @(message.Type== AARP.Models.MessageType.Success?"alert-success":"alert-info") alert-dismissible fade in' role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <strong>@message.Title !</strong> @message.Content
+    </div>
+}
+
+
+@Html.Partial("Report/_Grid")
+
+@section Scripts{
+    
+    <script src="~/Scripts/grids/interviewsReport.js?@DateTime.Now.Ticks"></script>
+    <script type="text/javascript">
+        var interviewsReport = interviewsReport || {};
+        $(document).ready(function () {
+            
+            interviewsReport.initGrid();
+        });
+    </script>
+
+    }

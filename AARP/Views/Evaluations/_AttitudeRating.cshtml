@@ -1,0 +1,21 @@
+﻿@model StandingsAttitudeViewModel
+
+<p class="at-rating p-positive d-inline">@((int)(Model.Positive * 100))%</p>
+<div class="attitude">
+    <div style="width:@((int)(Model.Positive * 100))%;" class="st-positive">
+    </div>
+</div>
+<br />
+<p class="at-rating p-neutral d-inline">@((int)(Model.Neutral * 100))%</p>
+<div class="attitude">
+    
+    <div style="width:@((int)(Model.Neutral * 100))%;" class="st-neutral">
+    </div>
+</div>
+<br />
+<p class="at-rating p-negative d-inline">@((int)(Model.Negative * 100))%</p>
+<div class="attitude">
+    
+    <div style="width:@((int)(Model.Negative * 100))%;" class="st-negative">
+    </div>
+</div>

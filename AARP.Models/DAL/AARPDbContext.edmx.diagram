@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e19ba577f6ef4dfcaec8620009fab7c4" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="AARP.Models.Configuration" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AARP.Models.JobApplication" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AARP.Models.JobPositionType" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AARP.Models.Reviewer" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AARP.Models.Interviewee" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AARP.Models.Interviewer" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AARP.Models.InterviewLength" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AARP.Models.InterviewRating" Width="1.5" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AARP.Models.Interview" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AARP.Models.InterviewStage" Width="1.5" PointX="11.75" PointY="5.75" />
+        <EntityTypeShape EntityType="AARP.Models.InterviewStatu" Width="1.5" PointX="11.75" PointY="8.75" />
+        <EntityTypeShape EntityType="AARP.Models.InterviewTechnology" Width="1.5" PointX="11.75" PointY="11.75" />
+        <EntityTypeShape EntityType="AARP.Models.Seniority" Width="1.5" PointX="5.75" PointY="12.75" />
+        <EntityTypeShape EntityType="AARP.Models.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="12.75" />
+        <EntityTypeShape EntityType="AARP.Models.AdminSetting" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AARP.Models.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="AARP.Models.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="AARP.Models.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="AARP.Models.AspNetUser" Width="1.5" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="AARP.Models.AggregatedCounter" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="AARP.Models.Counter" Width="1.5" PointX="2.75" PointY="13.75" />
+        <EntityTypeShape EntityType="AARP.Models.Hash" Width="1.5" PointX="13.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AARP.Models.Job" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="AARP.Models.JobParameter" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="AARP.Models.JobQueue" Width="1.5" PointX="13.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AARP.Models.List" Width="1.5" PointX="13.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AARP.Models.Schema" Width="1.5" PointX="13.75" PointY="12.75" />
+        <EntityTypeShape EntityType="AARP.Models.Server" Width="1.5" PointX="9.75" PointY="14.75" />
+        <EntityTypeShape EntityType="AARP.Models.Set" Width="1.5" PointX="11.75" PointY="14.75" />
+        <EntityTypeShape EntityType="AARP.Models.State" Width="1.5" PointX="3" PointY="9.75" />
+        <AssociationConnector Association="AARP.Models.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AARP.Models.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AARP.Models.FK_HangFire_JobParameter_Job" />
+        <AssociationConnector Association="AARP.Models.FK_HangFire_State_Job" />
+        <AssociationConnector Association="AARP.Models.AspNetUserRoles" />
+        <EntityTypeShape EntityType="AARP.Models.JobPosition" Width="1.5" PointX="5.375" PointY="15.75" />
+        <EntityTypeShape EntityType="AARP.Models.JobTechnology" Width="1.5" PointX="16.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

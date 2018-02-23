@@ -1,0 +1,73 @@
+﻿@model IEnumerable<AARP.Models.ApplicantViewModel>
+
+@{
+    ViewBag.Title = "Applicants";
+    var message = TempData["Message"] as AARP.Models.MessageViewModel;
+}
+
+<h2>@Html.Partial("_PreviousPage")Assigned Applicants</h2>
+
+<p>
+    <a id="btn-update" class="btn btn-primary" href="javascript:void()">Update Applicants</a>
+</p>
+
+
+@if (message != null)
+{
+    <div class='alert @(message.Type== AARP.Models.MessageType.Success?"alert-success":"alert-info") alert-dismissible fade in' role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <strong>@message.Title !</strong> @message.Content
+    </div>
+}
+
+@using (Html.BeginForm("UpdateApplicants", "Applicants", FormMethod.Post, new { @class = "hidden", @id = "requestUpdateApplicantsForm" })) { }
+
+<table class="table">
+    <tr>
+        <td>ID</td>
+        <td>Candidate</td>
+        <td>Job</td>
+        <td>Applied At</td>
+        <td>Status</td>
+        <td>Reviewer</td>
+        <td>Reminds Count</td>
+        <td></td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Applicant.Id)</td>
+            <td><a class="btn btn-info" target="_blank" href="https://scopicsoftware.recruiterbox.com/app/#candidates/list/all/view:@(item.Applicant.CandidateId)/">@item.Applicant.CandidateName</a></td>
+            <td>@Html.DisplayFor(modelItem => item.Applicant.JobName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Applicant.AppliedAt)</td>
+            <td>
+                <strong data-toggle="tooltip" title='@(item.Applicant.ReviewStatus == AARP.Models.ReviewStatus.Assigned?"At " + item.Applicant.AssignedToReviewerAt + " UTC":"" )'>
+                    @Html.DisplayFor(modelItem => item.Applicant.ReviewStatus)
+                </strong>
+            </td>
+            <td>
+                @if (item.Reviewer != null)
+                {
+                    <a class="btn btn-info" href="@Url.Action("Edit", "Reviewer", new { @id = item.Reviewer.Id })">@item.Reviewer.Name</a>
+                }
+
+            </td>
+            <td class="text-center">@Html.DisplayFor(modelItem => item.Applicant.RemindCount)</td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        $('#btn-update').click(function () {
+            $('#btn-update').after('<div class="alert alert-info" style="margin: 2px"><img src="@Url.Content("~/Content/Images/iWaiting.gif")" /> The page will be refreshed after finished. Please wait for a while...</div>');
+            $('#requestUpdateApplicantsForm').submit();
+        });
+    </script>
+
+}

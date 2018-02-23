@@ -1,0 +1,75 @@
+10/9/2017 9:36:43 AM	This log contains information about the import operation of the script 'SQLQuery1.sql' into project 'AARP.Database' on computer 'XPS' by user'Angel.
+10/9/2017 9:36:43 AM	Started importing file: C:\Users\Angel\Desktop\SQLQuery1.sql 
+10/9/2017 9:36:43 AM	File name C:\Users\Angel\Desktop\SQLQuery1.sql (size: 62832)
+10/9/2017 9:36:43 AM	Parsing import script
+10/9/2017 9:36:44 AM	Total number of batches in script: 183
+10/9/2017 9:36:44 AM	Total number of statements in script: 62
+10/9/2017 9:36:44 AM	The script was successfully imported into the project.
+10/9/2017 9:36:44 AM	Analyzing schema objects...
+10/9/2017 9:36:44 AM	Scanning project for duplicate elements
+10/9/2017 9:36:44 AM	Element '__MigrationHistory' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\__MigrationHistory.sql'.
+10/9/2017 9:36:44 AM	Element 'AdminSettings' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AdminSettings.sql'.
+10/9/2017 9:36:44 AM	Element 'AspNetRoles' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetRoles.sql'.
+10/9/2017 9:36:44 AM	Element 'AspNetUserClaims' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserClaims.sql'.
+10/9/2017 9:36:44 AM	Element 'AspNetUserLogins' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserLogins.sql'.
+10/9/2017 9:36:44 AM	Element 'AspNetUserRoles' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserRoles.sql'.
+10/9/2017 9:36:44 AM	Element 'AspNetUsers' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUsers.sql'.
+10/9/2017 9:36:44 AM	Element 'Configurations' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\Configurations.sql'.
+10/9/2017 9:36:44 AM	Element 'Interviewees' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\Interviewees.sql'.
+10/9/2017 9:36:44 AM	Element 'Interviewers' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\Interviewers.sql'.
+10/9/2017 9:36:44 AM	Element 'InterviewLength' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\InterviewLength.sql'.
+10/9/2017 9:36:44 AM	Element 'InterviewRatings' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\InterviewRatings.sql'.
+10/9/2017 9:36:44 AM	Element 'Interviews' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\Interviews.sql'.
+10/9/2017 9:36:44 AM	Element 'InterviewStage' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\InterviewStage.sql'.
+10/9/2017 9:36:44 AM	Element 'InterviewStatus' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\InterviewStatus.sql'.
+10/9/2017 9:36:44 AM	Element 'InterviewTechnologies' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\InterviewTechnologies.sql'.
+10/9/2017 9:36:44 AM	Element 'JobApplications' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\JobApplications.sql'.
+10/9/2017 9:36:44 AM	Element 'JobPositions' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\JobPositions.sql'.
+10/9/2017 9:36:44 AM	Element 'JobPositionTypes' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\JobPositionTypes.sql'.
+10/9/2017 9:36:44 AM	Element 'JobTechnologies' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\JobTechnologies.sql'.
+10/9/2017 9:36:44 AM	Element 'Reviewers' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\Reviewers.sql'.
+10/9/2017 9:36:44 AM	Element 'Seniority' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\Seniority.sql'.
+10/9/2017 9:36:44 AM	Element 'AggregatedCounter' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\AggregatedCounter.sql'.
+10/9/2017 9:36:44 AM	Element 'Counter' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Counter.sql'.
+10/9/2017 9:36:44 AM	Element 'Hash' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Hash.sql'.
+10/9/2017 9:36:44 AM	Element 'Job' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Job.sql'.
+10/9/2017 9:36:44 AM	Element 'JobParameter' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\JobParameter.sql'.
+10/9/2017 9:36:44 AM	Element 'JobQueue' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\JobQueue.sql'.
+10/9/2017 9:36:44 AM	Element 'List' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\List.sql'.
+10/9/2017 9:36:44 AM	Element 'Schema' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Schema.sql'.
+10/9/2017 9:36:44 AM	Element 'Server' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Server.sql'.
+10/9/2017 9:36:44 AM	Element 'Set' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Set.sql'.
+10/9/2017 9:36:44 AM	Element 'State' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\State.sql'.
+10/9/2017 9:36:44 AM	Element 'FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserClaims.sql'.
+10/9/2017 9:36:44 AM	Element 'FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserLogins.sql'.
+10/9/2017 9:36:44 AM	Element 'FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserRoles.sql'.
+10/9/2017 9:36:44 AM	Element 'FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserRoles.sql'.
+10/9/2017 9:36:44 AM	Element 'FK_HangFire_JobParameter_Job' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\JobParameter.sql'.
+10/9/2017 9:36:44 AM	Element 'FK_HangFire_State_Job' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\State.sql'.
+10/9/2017 9:36:44 AM	Element 'DF_Reviewers_TimeZone' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\Reviewers.sql'.
+10/9/2017 9:36:44 AM	Element 'RoleNameIndex' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetRoles.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_UserId' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserClaims.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_UserId' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserLogins.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_RoleId' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserRoles.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_UserId' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUserRoles.sql'.
+10/9/2017 9:36:44 AM	Element 'UserNameIndex' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\dbo\Tables\AspNetUsers.sql'.
+10/9/2017 9:36:44 AM	Element 'UX_HangFire_CounterAggregated_Key' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\AggregatedCounter.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_Counter_Key' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Counter.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_Hash_ExpireAt' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Hash.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_Hash_Key' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Hash.sql'.
+10/9/2017 9:36:44 AM	Element 'UX_HangFire_Hash_Key_Field' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Hash.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_Job_ExpireAt' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Job.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_Job_StateName' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Job.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_JobParameter_JobIdAndName' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\JobParameter.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_JobQueue_QueueAndFetchedAt' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\JobQueue.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_List_ExpireAt' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\List.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_List_Key' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\List.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_Set_ExpireAt' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Set.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_Set_Key' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Set.sql'.
+10/9/2017 9:36:44 AM	Element 'UX_HangFire_Set_KeyAndValue' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\Set.sql'.
+10/9/2017 9:36:44 AM	Element 'IX_HangFire_State_JobId' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\HangFire\Tables\State.sql'.
+10/9/2017 9:36:44 AM	Element 'HangFire' was merged into the existing script: 'D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\Security\HangFire.sql'.
+10/9/2017 9:36:44 AM	Finished duplicate element processing
+10/9/2017 9:36:45 AM	In the script that you provided to the import operation, one or more statements were not fully understood. These statements were moved to the ScriptsIgnoredOnImport.sql file. Review the file contents for additional information.
+10/9/2017 9:36:45 AM	A summary of the import was saved to the following location: D:\ScopicSoftware\Projects\RRS\Code\AARP.Database\Import Script Logs\SQLQuery1_sql_20171009073643.log
+10/9/2017 9:36:45 AM	Click Finish to continue...

@@ -1,0 +1,15 @@
+﻿CREATE TABLE [dbo].[AspNetRoles](
+	[Id] [nvarchar](128) NOT NULL,
+	[Name] [nvarchar](256) NOT NULL,
+ CONSTRAINT [PK_dbo.AspNetRoles] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Index [RoleNameIndex]    Script Date: 4/9/2017 11:45:36 PM ******/
+/****** Object:  Index [RoleNameIndex]    Script Date: 10/9/2017 8:56:53 AM ******/
+CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex] ON [dbo].[AspNetRoles]
+(
+	[Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]

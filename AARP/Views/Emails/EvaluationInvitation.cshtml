@@ -1,0 +1,19 @@
+﻿@model AARP.Services.Emails.EvaluationInvitationEmail
+
+@{
+    var evaluationUrl = string.Format("{0}{1}", Request.Url.Host, Model.EvaluationLink);
+}
+
+To: marat.c@scopicsoftware.com, hai.v@scopicssoftware.com
+From: internal@scopicsoftware.com
+Subject: Please, leave your opinion
+
+Dear, @Model.interviewee.Name
+
+We are excited to have interview with you. Your opinion about interview process is very valuable for us.
+We will appreciate if you spend some time for short survey.
+By clicking the link below you will be redirected to survey page.
+
+@evaluationUrl
+
+Please don’t reply to this email.

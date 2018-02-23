@@ -1,0 +1,28 @@
+﻿@model InterviewerPerformanceViewModel
+
+<div class="col-md-6 col-sm-6 col-xs-6">
+    <h2 class="m">@Model.Name</h2>
+    <h3>Average rating</h3>
+    <div>
+        <p class="rating">
+            @Model.AvgRating.ToString("F1")
+            @Html.Partial("_RatingStars", Model.AvgRating)
+        </p>
+        <div class="@(Model.IsPositiveTrend ? "arrow-up" : "arrow-down")"></div>
+    </div>
+
+    @Html.Partial("_AttitudeRating", Model.Attitude)
+</div>
+<div class="col-md-4 col-sm-6 col-xs-6">
+    <h4>Last 10 interviews</h4>
+    @for (var i = 0; i < 5; i++)
+    {
+        var ratingInfo = Model.Standings != null ? Model.Standings.FirstOrDefault(f => f.Rating == 5 - i): null;
+
+        <div>
+            <p class="rating-count">@(ratingInfo != null ? ratingInfo.RatingCount : 0 )</p>
+            <span class="rating-percentage">@(ratingInfo != null ? 100 * ratingInfo.RatingCount / 10 : 0 )%</span>
+            @Html.Partial("_RatingStars", (double)(5 - i))
+        </div>
+    }
+</div>

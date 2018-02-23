@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ScopicAARPModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ScopicAARPModelStoreContainer">
+    <EntitySet Name="Configurations" EntityType="ScopicAARPModel.Store.Configurations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reviewers" EntityType="ScopicAARPModel.Store.Reviewers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="JobApplications" EntityType="ScopicAARPModel.Store.JobApplications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="JobPositionTypes" EntityType="ScopicAARPModel.Store.JobPositionTypes" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Configurations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Key" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reviewers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="AssignedCount" Type="int" Nullable="false" />
+    <Property Name="RejectCount" Type="int" Nullable="false" />
+    <Property Name="AdvanceCount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobApplications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="CandidateId" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="AppliedAt" Type="datetime" Nullable="true" />
+    <Property Name="RejectAt" Type="datetime" Nullable="true" />
+    <Property Name="LastActivity" Type="datetime" Nullable="true" />
+    <Property Name="UrlCV" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="ReviewerId" Type="int" Nullable="true" />
+    <Property Name="RecorededAt" Type="datetime" Nullable="false" />
+    <Property Name="JobId" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="ApplicationUrl" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="ReviewStatus" Type="int" Nullable="false" />
+    <Property Name="RejectionReason" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="RemindCount" Type="int" Nullable="false" />
+    <Property Name="CandidateName" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="JobName" Type="nvarchar" Nullable="true" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="JobPositionTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="Interviewers" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ScopicAARPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Configuration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reviewer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AssignedCount" Type="Int32" Nullable="false" />
+          <Property Name="RejectCount" Type="Int32" Nullable="false" />
+          <Property Name="AdvanceCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ScopicAARPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Configurations" EntityType="Self.Configuration" />
+          <EntitySet Name="Reviewers" EntityType="Self.Reviewer" />
+          <EntitySet Name="JobApplications" EntityType="ScopicAARPModel.JobApplication" />
+          <EntitySet Name="JobPositionTypes" EntityType="ScopicAARPModel.JobPositionType" />
+        </EntityContainer>
+        <EntityType Name="JobApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CandidateId" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AppliedAt" Type="DateTime" Nullable="true" Precision="0" />
+          <Property Name="RejectAt" Type="DateTime" Nullable="true" Precision="0" />
+          <Property Name="LastActivity" Type="DateTime" Nullable="true" Precision="0" />
+          <Property Name="UrlCV" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewerId" Type="Int32" />
+          <Property Name="RecorededAt" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="JobId" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationUrl" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewStatus" Type="ScopicAARPModel.ApplicationReviewStatus" Nullable="false" />
+          <Property Name="RejectionReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RemindCount" Type="Int32" Nullable="false" />
+          <Property Name="CandidateName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="JobName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EnumType Name="ApplicationReviewStatus" IsFlags="true">
+          <Member Name="New" Value="0" />
+          <Member Name="Rejected" Value="-1" />
+          <Member Name="Accepted" Value="1" />
+          <Member Name="Assigned" Value="2" />
+          <Member Name="JobClosed" Value="3" />
+          <Member Name="Deleted" Value="4" />
+        </EnumType>
+        <EntityType Name="JobPositionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Interviewers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ScopicAARPModelStoreContainer" CdmEntityContainer="ScopicAARPEntities">
+    <EntitySetMapping Name="Configurations">
+      <EntityTypeMapping TypeName="IsTypeOf(ScopicAARPModel.Configuration)">
+        <MappingFragment StoreEntitySet="Configurations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviewers">
+      <EntityTypeMapping TypeName="IsTypeOf(ScopicAARPModel.Reviewer)">
+        <MappingFragment StoreEntitySet="Reviewers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="AssignedCount" ColumnName="AssignedCount" />
+          <ScalarProperty Name="RejectCount" ColumnName="RejectCount" />
+          <ScalarProperty Name="AdvanceCount" ColumnName="AdvanceCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobApplications">
+      <EntityTypeMapping TypeName="IsTypeOf(ScopicAARPModel.JobApplication)">
+        <MappingFragment StoreEntitySet="JobApplications">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+          <ScalarProperty Name="AppliedAt" ColumnName="AppliedAt" />
+          <ScalarProperty Name="RejectAt" ColumnName="RejectAt" />
+          <ScalarProperty Name="LastActivity" ColumnName="LastActivity" />
+          <ScalarProperty Name="UrlCV" ColumnName="UrlCV" />
+          <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
+          <ScalarProperty Name="RecorededAt" ColumnName="RecorededAt" />
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="ApplicationUrl" ColumnName="ApplicationUrl" />
+          <ScalarProperty Name="ReviewStatus" ColumnName="ReviewStatus" />
+          <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
+          <ScalarProperty Name="RemindCount" ColumnName="RemindCount" />
+          <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+          <ScalarProperty Name="JobName" ColumnName="JobName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobPositionTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(ScopicAARPModel.JobPositionType)">
+        <MappingFragment StoreEntitySet="JobPositionTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Interviewers" ColumnName="Interviewers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

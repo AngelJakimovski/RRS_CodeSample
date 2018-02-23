@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentDate = DateTime.Now;
+}
+@section styles{
+    @RenderSection("styles", false)
+    <link rel="stylesheet" type="text/css" href="~/Content/Evaluation/SearchField.css">
+}
+
+<div class="navbar-collapse collapse menu">
+    <ul class="nav navbar-nav">
+        @*<li>
+                <a href="@Url.Action("Index","Configuration")">
+                    <span class="glyphicon glyphicon-cog"></span> Configurations
+                </a>
+            </li>*@
+        <li>
+            <a href="@Url.Action("Stats","Evaluations")">Stats</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Standings","Evaluations")">Standings</a>
+        </li>
+        <li class="dropdown">
+            <a href="@Url.Action("Interviews","Evaluations")">Interviews<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="#">Interviewer</a>
+                </li>
+                <li>
+                    <a href="#">Interviewee</a>
+                </li>
+            </ul>
+
+        </li>
+        <li>
+            <a href="@Url.Action("Report","Evaluations")">Report</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Admin","Evaluations")">Admin</a>
+        </li>
+    </ul>
+</div>
+<div class="container">
+    @RenderBody()
+</div>
+@section scripts{
+    <script src="~/Scripts/Evaluations/SearchField.js"></script>
+    <script src="~/Scripts/Evaluations/interviewersProfile.js"></script>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+
+        $(function() {
+            SearchField.init({
+                interviewersUrl: '@Url.Action("GetInterviewer","Interviewer")',
+                interviewerProfileUrl: '@Url.Action("Interviewer", "Evaluations")',
+                standingsUrl: '@Url.Action("Standings", "Evaluations")',
+                standingsPage : '@(ViewContext.RouteData.Values["action"].ToString() == "Standings" && ViewContext.RouteData.Values["controller"].ToString() == "Evaluations")'
+            });
+        });
+
+    </script>
+}

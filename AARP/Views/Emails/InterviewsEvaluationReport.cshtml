@@ -1,0 +1,44 @@
+﻿@model AARP.Services.Emails.InterviewsEvaluationReportEmail
+
+To: angel.j@scopicsoftware.com
+From: internal@scopicsoftware.com
+Subject: Weekly evaluation interviews report
+
+<table class="table table-responsive">
+    <tr>
+        <th>Interviwee</th>
+        <th>Email</th>
+        <th>Interviewer</th>
+        <th>Feedback status</th>
+        <th>Date of interview</th>
+        <th>Interview stage</th>
+        <th>Seniority</th>
+    </tr>
+    @foreach (var item in Model.InterviewReportItems)
+    {
+        <tr>
+            <td>
+                @item.interviewee.Name
+            </td>
+            <td>
+                @item.interviewee.Email
+            </td>
+            <td>
+                @item.interviewer.InterviewerName
+            </td>
+            <td>
+                @item.interview.SurveyStatus
+            </td>
+            <td>
+                @item.interview.Date.ToShortDateString()
+            </td>
+            <td>
+                @item.stage.Stage
+            </td>
+            <td>
+                @item.seniority.SeniorityName
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AARP.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="GreenHouse_APIToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">84a0a1017ef5d00dd9e8cb252e6153de</Value>
+    </Setting>
+    <Setting Name="GreenHouseJobOpen" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">open</Value>
+    </Setting>
+    <Setting Name="GreenHouseJobClosed" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">closed</Value>
+    </Setting>
+    <Setting Name="GreenHouseActiveStatus" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">active</Value>
+    </Setting>
+    <Setting Name="CustomField_PositionType" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">position_type</Value>
+    </Setting>
+    <Setting Name="GreenHouse_HarvestAPIBaseAddess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://harvest.greenhouse.io/v1</Value>
+    </Setting>
+    <Setting Name="StageName_ApplicationReviewCV" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Application / CV review</Value>
+    </Setting>
+    <Setting Name="RecuringJob_UpdateApplicationStatus" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="RecuringJob_SendEmailOfNewApplication" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="RecuringJob_SendEmailOfRemindReview" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="RecuringJob_SendEscalationEmailOfTimeOutApplication" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="DataLifeTime" Type="System.TimeSpan" Scope="Application">
+      <Value Profile="(Default)">01:00:00</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,161 @@
+﻿@model AARP.Models.Evaluations.IntervieweeResponseViewModel
+
+<div class="row"style="background-color:#E3F0FF; margin-right:5px; border-color:#ABD8ED; border-width:2px; border:thin">
+    <div class="col-md-6">
+        <h3>@Model.InterviewerName</h3>
+    </div>
+    <div class="col-md-6 text-center">
+        @{
+            var ratings = "";
+            for (var i = 0; i < 5; i++)
+            {
+                if (Model.Survey.RatingId > i)
+                {
+                    ratings += string.Format(@"<i class=""glyphicon glyphicon-star""></i>");
+                }
+                else
+                {
+                    ratings += string.Format(@"<i class=""glyphicon glyphicon-star-empty""></i>");
+                }
+            }
+        }
+        <h3 class="success">@Model.Survey.RatingId @Html.Raw(ratings)</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="form-horizontal">
+
+        <div class="survey">
+
+            <div class="form-group">
+                <strong> @Html.LabelFor(model => model.Survey.InterviewerAttitude, htmlAttributes: new { @class = "control-label col-md-8" })</strong>
+                <div class="col-md-5">
+                    <p class="survey-variant">
+                        @if (Model.Survey.InterviewerAttitude == "Positive")
+                        {
+                            <input type="radio" value="Positive" name="@string.Format("InterviewerAttitude{0}", Model.Survey.Id)" id="attitude-pos" checked="checked" disabled /><label for="attitude-pos">Positive</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="Positive" name="@string.Format("InterviewerAttitude{0}", Model.Survey.Id)" id="attitude-pos" disabled /><label for="attitude-pos">Positive</label>
+                        }
+                    </p>
+                    <p class="survey-variant">
+                        @if (Model.Survey.InterviewerAttitude == "Neutral")
+                        {
+                            <input type="radio" value="Neutral" name="@string.Format("InterviewerAttitude{0}", Model.Survey.Id)" id="attitude-neu" checked="checked" disabled /><label for="attitude-neu">Neutral</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="Neutral" name="@string.Format("InterviewerAttitude{0}", Model.Survey.Id)" id="attitude-neu" disabled /><label for="attitude-neu">Neutral</label>
+                        }
+                    </p>
+                    <p class="survey-variant">
+                        @if (Model.Survey.InterviewerAttitude == "Negative")
+                        {
+                            <input type="radio" value="Negative" name="@string.Format("InterviewerAttitude{0}", Model.Survey.Id)" id="attitude-neg" checked="checked" disabled /><label for="attitude-neg">Negative</label>
+
+                        }
+                        else
+                        {
+                            <input type="radio" value="Negative" name="@string.Format("InterviewerAttitude{0}", Model.Survey.Id)" id="attitude-neg" disabled /><label for="attitude-neg">Negative</label>
+
+                        }
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong>@Html.LabelFor(model => model.Survey.TestTask, htmlAttributes: new { @class = "control-label col-md-8" })</strong>
+                <div class="col-md-5">
+                    <p class="survey-variant">
+                        @if (Model.Survey.TestTask != null && Model.Survey.TestTask.Value)
+                        {
+                            <input type="radio" value="true" name="@string.Format("TestTask{0}", Model.Survey.Id)" id="task-yes" checked="checked" disabled /><label for="task-yes">Yes</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="true" name="@string.Format("TestTask{0}", Model.Survey.Id)" id="task-yes" disabled /><label for="task-yes">Yes</label>
+                        }
+                    </p>
+                    <p class="survey-variant">
+                        @if (Model.Survey.TestTask != null && !Model.Survey.TestTask.Value)
+                        {
+                            <input type="radio" value="false" name="@string.Format("TestTask{0}", Model.Survey.Id)" id="task-no" checked="checked" disabled /><label for="task-no">No</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="false" name="@string.Format("TestTask{0}", Model.Survey.Id)" id="task-no" disabled /><label for="task-no">No</label>
+
+                        }
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <strong>@Html.LabelFor(model => model.Survey.TaskDifficultyLevel, htmlAttributes: new { @class = "control-label col-md-8" })</strong>
+                <div class="col-md-5">
+                    <p class="survey-variant">
+                        @if (Model.Survey.TaskDifficultyLevel == "easy")
+                        {
+                            <input type="radio" value="easy" name="@string.Format("TaskDifficultyLevel{0}", Model.Survey.Id)" id="dif-easy" checked="checked" disabled /><label for="dif-easy">Task was easy</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="easy" name="@string.Format("TaskDifficultyLevel{0}", Model.Survey.Id)" id="dif-easy" disabled /><label for="dif-easy">Task was easy</label>
+                        }
+                    </p>
+                    <p class="survey-variant">
+                        @if (Model.Survey.TaskDifficultyLevel == "medium")
+                        {
+                            <input type="radio" value="medium" name="@string.Format("TaskDifficultyLevel{0}", Model.Survey.Id)" id="dif-medium" checked="checked" disabled /><label for="dif-medium">Task was of medium difficulty</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="medium" name="@string.Format("TaskDifficultyLevel{0}", Model.Survey.Id)" id="dif-medium" disabled /><label for="dif-medium">Task was of medium difficulty</label>
+                        }
+
+                    </p>
+                    <p class="survey-variant">
+                        @if (Model.Survey.TaskDifficultyLevel == "hard")
+                        {
+                            <input type="radio" value="hard" name="@string.Format("TaskDifficultyLevel{0}", Model.Survey.Id)" id="dif-complex" checked="checked" disabled /><label for="dif-complex">Task was very hard/complex</label>
+                        }
+                        else
+                        {
+                            <input type="radio" value="hard" name="@string.Format("TaskDifficultyLevel{0}", Model.Survey.Id)" id="dif-complex" disabled /><label for="dif-complex">Task was very hard/complex</label>
+                        }
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Survey.InterviewLengthId, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-5">
+                    @foreach (var length in (IEnumerable<InterviewLength>)ViewBag.InterviewLengths)
+                    {
+                        <p class="survey-variant">
+                            @if (Model.Survey.InterviewLengthId == length.Id)
+                            {
+                                <input type="radio" value="@length.Id" name="@string.Format("InterviewLengthId{0}", Model.Survey.Id)" id="length-@length.Id" checked="checked" disabled/><label for="length-@length.Id">@length.Length</label>
+                            }
+                            else
+                            {
+                                <input type="radio" value="@length.Id" name="@string.Format("InterviewLengthId{0}", Model.Survey.Id)" id="length-@length.Id" disabled /><label for="length-@length.Id">@length.Length</label>
+                            }
+                        </p>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Survey.NoteFromInterviewee, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Survey.NoteFromInterviewee, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

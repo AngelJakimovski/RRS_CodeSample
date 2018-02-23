@@ -1,0 +1,1302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ScopicAARPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="EmailTimer" Type="int" Nullable="false" />
+          <Property Name="FeedbackMessage" Type="ntext" Nullable="false" />
+          <Property Name="ReminderID" Type="int" Nullable="false" />
+          <Property Name="ReminderMessage" Type="ntext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Configurations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interviewees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="200" />
+          <Property Name="OpeningID" Type="int" Nullable="false" />
+          <Property Name="StageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interviewers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="InterviewerName" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="InterviewerEmail" Type="nchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InterviewLength">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Length" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InterviewRatings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interviews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="InterviewerId" Type="int" Nullable="false" />
+          <Property Name="IntervieweeId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="InterviewStageId" Type="int" Nullable="false" />
+          <Property Name="SeniorityId" Type="int" Nullable="false" />
+          <Property Name="TechnologyId" Type="int" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="RatingId" Type="int" Nullable="false" />
+          <Property Name="InterviewerAttitude" Type="nchar" MaxLength="100" />
+          <Property Name="TestTask" Type="bit" />
+          <Property Name="TaskDifficultyLevel" Type="nchar" MaxLength="100" />
+          <Property Name="InterviewLengthId" Type="int" />
+          <Property Name="NoteFromInterviewee" Type="nvarchar" MaxLength="500" />
+          <Property Name="SurveyStatus" Type="nchar" MaxLength="100" />
+          <Property Name="FeedbackLink" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="InterviewStage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Stage" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InterviewStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InterviewTechnologies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Technology" Type="nchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobApplications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CandidateId" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CandidateName" Type="nvarchar" MaxLength="256" />
+          <Property Name="AppliedAt" Type="datetime" />
+          <Property Name="RecorededAt" Type="datetime" Nullable="false" />
+          <Property Name="AssignedToReviewerAt" Type="datetime" />
+          <Property Name="RecentRemindAt" Type="datetime" />
+          <Property Name="RejectAt" Type="datetime" />
+          <Property Name="RejectionReason" Type="nvarchar(max)" />
+          <Property Name="ReviewerId" Type="int" />
+          <Property Name="JobId" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="JobName" Type="nvarchar" MaxLength="256" />
+          <Property Name="ReviewStatus" Type="int" Nullable="false" />
+          <Property Name="RemindCount" Type="int" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="256" />
+          <Property Name="RejectedOrAcceptedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobPositions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Interviewers" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobPositionTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Interviewers" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobTechnologies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Technology" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reviewers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="AssignedCount" Type="int" Nullable="false" />
+          <Property Name="RejectCount" Type="int" Nullable="false" />
+          <Property Name="AdvanceCount" Type="int" Nullable="false" />
+          <Property Name="RecentAssignedAt" Type="datetime" />
+          <Property Name="TimeZone" Type="nvarchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="Seniority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Seniority" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AggregatedCounter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="bigint" Nullable="false" />
+          <Property Name="ExpireAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Counter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="smallint" Nullable="false" />
+          <Property Name="ExpireAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Hash">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Field" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="ExpireAt" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="StateName" Type="nvarchar" MaxLength="20" />
+          <Property Name="InvocationData" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Arguments" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="ExpireAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JobParameter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="JobQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobId" Type="int" Nullable="false" />
+          <Property Name="Queue" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FetchedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="ExpireAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Schema">
+          <Key>
+            <PropertyRef Name="Version" />
+          </Key>
+          <Property Name="Version" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Server">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" />
+          <Property Name="LastHeartbeat" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Set">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Score" Type="float" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ExpireAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HangFire_JobParameter_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HangFire_State_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScopicAARPModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminSettings" EntityType="Self.AdminSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Configurations" EntityType="Self.Configurations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Interviewees" EntityType="Self.Interviewees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Interviewers" EntityType="Self.Interviewers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterviewLength" EntityType="Self.InterviewLength" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterviewRatings" EntityType="Self.InterviewRatings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Interviews" EntityType="Self.Interviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterviewStage" EntityType="Self.InterviewStage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterviewStatus" EntityType="Self.InterviewStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InterviewTechnologies" EntityType="Self.InterviewTechnologies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobApplications" EntityType="Self.JobApplications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobPositions" EntityType="Self.JobPositions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobPositionTypes" EntityType="Self.JobPositionTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobTechnologies" EntityType="Self.JobTechnologies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviewers" EntityType="Self.Reviewers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seniority" EntityType="Self.Seniority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AggregatedCounter" EntityType="Self.AggregatedCounter" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Counter" EntityType="Self.Counter" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Hash" EntityType="Self.Hash" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="JobParameter" EntityType="Self.JobParameter" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="JobQueue" EntityType="Self.JobQueue" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="List" EntityType="Self.List" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Schema" EntityType="Self.Schema" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Server" EntityType="Self.Server" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="Set" EntityType="Self.Set" Schema="HangFire" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="HangFire" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HangFire_JobParameter_Job" Association="Self.FK_HangFire_JobParameter_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="JobParameter" EntitySet="JobParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HangFire_State_Job" Association="Self.FK_HangFire_State_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AARP.Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Configuration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CandidateId" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CandidateName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AppliedAt" Type="DateTime" Precision="3" />
+          <Property Name="RecorededAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AssignedToReviewerAt" Type="DateTime" Precision="3" />
+          <Property Name="RecentRemindAt" Type="DateTime" Precision="3" />
+          <Property Name="RejectAt" Type="DateTime" Precision="3" />
+          <Property Name="ReviewerId" Type="Int32" />
+          <Property Name="ReviewStatus" Type="AARP.Models.ReviewStatus" Nullable="false" />
+          <Property Name="JobId" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="RemindCount" Type="Int32" Nullable="false" />
+          <Property Name="RejectionReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RejectedOrAcceptedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="JobPositionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Interviewers" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Reviewer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AssignedCount" Type="Int32" Nullable="false" />
+          <Property Name="RejectCount" Type="Int32" Nullable="false" />
+          <Property Name="AdvanceCount" Type="Int32" Nullable="false" />
+          <Property Name="RecentAssignedAt" Type="DateTime" Precision="3" />
+          <Property Name="TimeZone" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="AARPDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Configurations" EntityType="Self.Configuration" />
+          <EntitySet Name="JobApplications" EntityType="Self.JobApplication" />
+          <EntitySet Name="JobPositionTypes" EntityType="Self.JobPositionType" />
+          <EntitySet Name="Reviewers" EntityType="Self.Reviewer" />
+          <EntitySet Name="Interviewees" EntityType="AARP.Models.Interviewee" />
+          <EntitySet Name="Interviewers" EntityType="AARP.Models.Interviewer" />
+          <EntitySet Name="InterviewLengths" EntityType="AARP.Models.InterviewLength" />
+          <EntitySet Name="InterviewRatings" EntityType="AARP.Models.InterviewRating" />
+          <EntitySet Name="Interviews" EntityType="AARP.Models.Interview" />
+          <EntitySet Name="InterviewStages" EntityType="AARP.Models.InterviewStage" />
+          <EntitySet Name="InterviewStatus" EntityType="AARP.Models.InterviewStatu" />
+          <EntitySet Name="InterviewTechnologies" EntityType="AARP.Models.InterviewTechnology" />
+          <EntitySet Name="Seniorities" EntityType="AARP.Models.Seniority" />
+          <EntitySet Name="C__MigrationHistory" EntityType="AARP.Models.C__MigrationHistory" />
+          <EntitySet Name="AdminSettings" EntityType="AARP.Models.AdminSetting" />
+          <EntitySet Name="AspNetRoles" EntityType="AARP.Models.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="AARP.Models.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="AARP.Models.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="AARP.Models.AspNetUser" />
+          <EntitySet Name="AggregatedCounters" EntityType="AARP.Models.AggregatedCounter" />
+          <EntitySet Name="Counters" EntityType="AARP.Models.Counter" />
+          <EntitySet Name="Hashes" EntityType="AARP.Models.Hash" />
+          <EntitySet Name="Jobs" EntityType="AARP.Models.Job" />
+          <EntitySet Name="JobParameters" EntityType="AARP.Models.JobParameter" />
+          <EntitySet Name="JobQueues" EntityType="AARP.Models.JobQueue" />
+          <EntitySet Name="Lists" EntityType="AARP.Models.List" />
+          <EntitySet Name="Schemata" EntityType="AARP.Models.Schema" />
+          <EntitySet Name="Servers" EntityType="AARP.Models.Server" />
+          <EntitySet Name="Sets" EntityType="AARP.Models.Set" />
+          <EntitySet Name="States" EntityType="AARP.Models.State" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AARP.Models.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AARP.Models.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HangFire_JobParameter_Job" Association="AARP.Models.FK_HangFire_JobParameter_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="JobParameter" EntitySet="JobParameters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HangFire_State_Job" Association="AARP.Models.FK_HangFire_State_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="AARP.Models.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="JobPositions" EntityType="AARP.Models.JobPosition" />
+          <EntitySet Name="JobTechnologies" EntityType="AARP.Models.JobTechnology" />
+        </EntityContainer>
+        <EnumType Name="ReviewStatus">
+          <Member Name="New" Value="0" />
+          <Member Name="Rejected" Value="-1" />
+          <Member Name="Accepted" Value="1" />
+          <Member Name="Assigned" Value="2" />
+          <Member Name="JobClosed" Value="3" />
+          <Member Name="Deleted" Value="4" />
+          <Member Name="HandledAsReferral" Value="5" />
+          <Member Name="Error" Value="6" />
+        </EnumType>
+        <EntityType Name="Interviewee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="OpeningID" Type="Int32" Nullable="false" />
+          <Property Name="StageID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interviewer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="InterviewerName" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="InterviewerEmail" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InterviewLength">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Length" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InterviewRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interview">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="InterviewerId" Type="Int32" Nullable="false" />
+          <Property Name="IntervieweeId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="InterviewStageId" Type="Int32" Nullable="false" />
+          <Property Name="SeniorityId" Type="Int32" Nullable="false" />
+          <Property Name="TechnologyId" Type="Int32" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="RatingId" Type="Int32" Nullable="false" />
+          <Property Name="InterviewerAttitude" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="TestTask" Type="Boolean" />
+          <Property Name="TaskDifficultyLevel" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="InterviewLengthId" Type="Int32" />
+          <Property Name="NoteFromInterviewee" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SurveyStatus" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="FeedbackLink" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InterviewStage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Stage" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InterviewStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InterviewTechnology">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Technology" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Seniority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeniorityName" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AdminSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="EmailTimer" Type="Int32" Nullable="false" />
+          <Property Name="FeedbackMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReminderID" Type="Int32" Nullable="false" />
+          <Property Name="ReminderMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="AARP.Models.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="AARP.Models.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="AARP.Models.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="AARP.Models.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="AARP.Models.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="AARP.Models.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="AggregatedCounter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Int64" Nullable="false" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Counter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="Int16" Nullable="false" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Hash">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Field" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="StateName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="InvocationData" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Arguments" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="JobParameters" Relationship="AARP.Models.FK_HangFire_JobParameter_Job" FromRole="Job" ToRole="JobParameter" />
+          <NavigationProperty Name="States" Relationship="AARP.Models.FK_HangFire_State_Job" FromRole="Job" ToRole="State" />
+        </EntityType>
+        <EntityType Name="JobParameter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Job" Relationship="AARP.Models.FK_HangFire_JobParameter_Job" FromRole="JobParameter" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="JobQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="Queue" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FetchedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Schema">
+          <Key>
+            <PropertyRef Name="Version" />
+          </Key>
+          <Property Name="Version" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Server">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastHeartbeat" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Set">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Score" Type="Double" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Job" Relationship="AARP.Models.FK_HangFire_State_Job" FromRole="State" ToRole="Job" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="AARP.Models.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AARP.Models.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="AARP.Models.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AARP.Models.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HangFire_JobParameter_Job">
+          <End Type="AARP.Models.Job" Role="Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AARP.Models.JobParameter" Role="JobParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobParameter">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HangFire_State_Job">
+          <End Type="AARP.Models.Job" Role="Job" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AARP.Models.State" Role="State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="JobId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="AARP.Models.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="AARP.Models.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityType Name="JobPosition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Interviewers" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="JobTechnology">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Technology" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ScopicAARPModelStoreContainer" CdmEntityContainer="AARPDbContext">
+          <EntitySetMapping Name="Configurations">
+            <EntityTypeMapping TypeName="AARP.Models.Configuration">
+              <MappingFragment StoreEntitySet="Configurations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobApplications">
+            <EntityTypeMapping TypeName="AARP.Models.JobApplication">
+              <MappingFragment StoreEntitySet="JobApplications">
+                <ScalarProperty Name="RejectedOrAcceptedAt" ColumnName="RejectedOrAcceptedAt" />
+                <ScalarProperty Name="RecentRemindAt" ColumnName="RecentRemindAt" />
+                <ScalarProperty Name="AssignedToReviewerAt" ColumnName="AssignedToReviewerAt" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="AppliedAt" ColumnName="AppliedAt" />
+                <ScalarProperty Name="RejectAt" ColumnName="RejectAt" />
+                <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
+                <ScalarProperty Name="RecorededAt" ColumnName="RecorededAt" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="ReviewStatus" ColumnName="ReviewStatus" />
+                <ScalarProperty Name="RejectionReason" ColumnName="RejectionReason" />
+                <ScalarProperty Name="RemindCount" ColumnName="RemindCount" />
+                <ScalarProperty Name="CandidateName" ColumnName="CandidateName" />
+                <ScalarProperty Name="JobName" ColumnName="JobName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobPositionTypes">
+            <EntityTypeMapping TypeName="AARP.Models.JobPositionType">
+              <MappingFragment StoreEntitySet="JobPositionTypes">
+                <ScalarProperty Name="Interviewers" ColumnName="Interviewers" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviewers">
+            <EntityTypeMapping TypeName="AARP.Models.Reviewer">
+              <MappingFragment StoreEntitySet="Reviewers">
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="RecentAssignedAt" ColumnName="RecentAssignedAt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AssignedCount" ColumnName="AssignedCount" />
+                <ScalarProperty Name="RejectCount" ColumnName="RejectCount" />
+                <ScalarProperty Name="AdvanceCount" ColumnName="AdvanceCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interviewees">
+            <EntityTypeMapping TypeName="AARP.Models.Interviewee">
+              <MappingFragment StoreEntitySet="Interviewees">
+                <ScalarProperty Name="StageID" ColumnName="StageID" />
+                <ScalarProperty Name="OpeningID" ColumnName="OpeningID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interviewers">
+            <EntityTypeMapping TypeName="AARP.Models.Interviewer">
+              <MappingFragment StoreEntitySet="Interviewers">
+                <ScalarProperty Name="InterviewerEmail" ColumnName="InterviewerEmail" />
+                <ScalarProperty Name="InterviewerName" ColumnName="InterviewerName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewLengths">
+            <EntityTypeMapping TypeName="AARP.Models.InterviewLength">
+              <MappingFragment StoreEntitySet="InterviewLength">
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewRatings">
+            <EntityTypeMapping TypeName="AARP.Models.InterviewRating">
+              <MappingFragment StoreEntitySet="InterviewRatings">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interviews">
+            <EntityTypeMapping TypeName="AARP.Models.Interview">
+              <MappingFragment StoreEntitySet="Interviews">
+                <ScalarProperty Name="FeedbackLink" ColumnName="FeedbackLink" />
+                <ScalarProperty Name="SurveyStatus" ColumnName="SurveyStatus" />
+                <ScalarProperty Name="NoteFromInterviewee" ColumnName="NoteFromInterviewee" />
+                <ScalarProperty Name="InterviewLengthId" ColumnName="InterviewLengthId" />
+                <ScalarProperty Name="TaskDifficultyLevel" ColumnName="TaskDifficultyLevel" />
+                <ScalarProperty Name="TestTask" ColumnName="TestTask" />
+                <ScalarProperty Name="InterviewerAttitude" ColumnName="InterviewerAttitude" />
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="TechnologyId" ColumnName="TechnologyId" />
+                <ScalarProperty Name="SeniorityId" ColumnName="SeniorityId" />
+                <ScalarProperty Name="InterviewStageId" ColumnName="InterviewStageId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IntervieweeId" ColumnName="IntervieweeId" />
+                <ScalarProperty Name="InterviewerId" ColumnName="InterviewerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewStages">
+            <EntityTypeMapping TypeName="AARP.Models.InterviewStage">
+              <MappingFragment StoreEntitySet="InterviewStage">
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewStatus">
+            <EntityTypeMapping TypeName="AARP.Models.InterviewStatu">
+              <MappingFragment StoreEntitySet="InterviewStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterviewTechnologies">
+            <EntityTypeMapping TypeName="AARP.Models.InterviewTechnology">
+              <MappingFragment StoreEntitySet="InterviewTechnologies">
+                <ScalarProperty Name="Technology" ColumnName="Technology" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seniorities">
+            <EntityTypeMapping TypeName="AARP.Models.Seniority">
+              <MappingFragment StoreEntitySet="Seniority">
+                <ScalarProperty Name="SeniorityName" ColumnName="Seniority" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="AARP.Models.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminSettings">
+            <EntityTypeMapping TypeName="AARP.Models.AdminSetting">
+              <MappingFragment StoreEntitySet="AdminSettings">
+                <ScalarProperty Name="ReminderMessage" ColumnName="ReminderMessage" />
+                <ScalarProperty Name="ReminderID" ColumnName="ReminderID" />
+                <ScalarProperty Name="FeedbackMessage" ColumnName="FeedbackMessage" />
+                <ScalarProperty Name="EmailTimer" ColumnName="EmailTimer" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="AARP.Models.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="AARP.Models.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="AARP.Models.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="AARP.Models.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AggregatedCounters">
+            <EntityTypeMapping TypeName="AARP.Models.AggregatedCounter">
+              <MappingFragment StoreEntitySet="AggregatedCounter">
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Counters">
+            <EntityTypeMapping TypeName="AARP.Models.Counter">
+              <MappingFragment StoreEntitySet="Counter">
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hashes">
+            <EntityTypeMapping TypeName="AARP.Models.Hash">
+              <MappingFragment StoreEntitySet="Hash">
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Field" ColumnName="Field" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="AARP.Models.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Arguments" ColumnName="Arguments" />
+                <ScalarProperty Name="InvocationData" ColumnName="InvocationData" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobParameters">
+            <EntityTypeMapping TypeName="AARP.Models.JobParameter">
+              <MappingFragment StoreEntitySet="JobParameter">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobQueues">
+            <EntityTypeMapping TypeName="AARP.Models.JobQueue">
+              <MappingFragment StoreEntitySet="JobQueue">
+                <ScalarProperty Name="FetchedAt" ColumnName="FetchedAt" />
+                <ScalarProperty Name="Queue" ColumnName="Queue" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lists">
+            <EntityTypeMapping TypeName="AARP.Models.List">
+              <MappingFragment StoreEntitySet="List">
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schemata">
+            <EntityTypeMapping TypeName="AARP.Models.Schema">
+              <MappingFragment StoreEntitySet="Schema">
+                <ScalarProperty Name="Version" ColumnName="Version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servers">
+            <EntityTypeMapping TypeName="AARP.Models.Server">
+              <MappingFragment StoreEntitySet="Server">
+                <ScalarProperty Name="LastHeartbeat" ColumnName="LastHeartbeat" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sets">
+            <EntityTypeMapping TypeName="AARP.Models.Set">
+              <MappingFragment StoreEntitySet="Set">
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="AARP.Models.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="AARP.Models.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="JobPositions">
+            <EntityTypeMapping TypeName="AARP.Models.JobPosition">
+              <MappingFragment StoreEntitySet="JobPositions">
+                <ScalarProperty Name="Interviewers" ColumnName="Interviewers" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobTechnologies">
+            <EntityTypeMapping TypeName="AARP.Models.JobTechnology">
+              <MappingFragment StoreEntitySet="JobTechnologies">
+                <ScalarProperty Name="Technology" ColumnName="Technology" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

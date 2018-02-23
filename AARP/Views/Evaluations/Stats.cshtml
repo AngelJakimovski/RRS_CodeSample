@@ -1,0 +1,62 @@
+﻿@model AARP.Models.Evaluations.StatsViewModel
+@{
+    Layout = "~/Views/Shared/_EvaluationsLayout.cshtml";
+    ViewBag.Title = "Evaluations";
+    var currentDate = DateTime.Now;
+}
+
+<div class="row stats">
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <h2>@Html.Partial("_PreviousPage") Stats @Html.Partial("_SharePage")@Html.Partial("_PrintPdf")</h2>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        @Html.Partial("_SearchField")
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12 date-filter">
+        @Html.Partial("_DateRangeFilter")
+        <input type="button" value="Apply" id="filterStat" />
+    </div>
+</div>
+<br />
+
+@Html.Partial("_Common/_Message")
+
+<div id="stats">
+    @Html.Action("GetStats", new { dateFrom = currentDate.AddDays(-30), dateTo = currentDate })
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        var constants = {
+            dateFrom: 'date-from',
+            dateTo: 'date-to',
+            applyBtn: 'filterStat'
+        };
+
+        $(document).ready(function () {
+            var currentDate = new Date(@(currentDate.Year), @(currentDate.Month - 1), @(currentDate.Day));
+            var fromDate = new Date(currentDate);
+            fromDate.setDate(fromDate.getDate() - 30);
+            $('.date-filter-input').datepicker({maxDate: 0});
+
+            $('.' + constants.dateTo).datepicker('setDate', currentDate);
+            $('.' + constants.dateFrom).datepicker('setDate', fromDate);
+        });
+
+        $('#' + constants.applyBtn).click(function () {
+
+            var dateFrom = $('.' + constants.dateFrom).val();
+            var dateTo = $('.' + constants.dateTo).val();
+
+            $.ajax({
+                url: 'getstats',
+                data: { dateFrom: dateFrom, dateTo: dateTo},
+                type: 'get',
+                success: function (data) {
+                    $('#stats').html(data);
+                }
+            });
+        });
+    </script>
+}

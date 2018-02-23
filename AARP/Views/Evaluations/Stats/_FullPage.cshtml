@@ -1,0 +1,13 @@
+﻿@model  AARP.Models.Evaluations.StatsViewModel
+@{
+    var dateFrom = (DateTime)ViewBag.DateFrom;
+    var dateTo = (DateTime)ViewBag.DateTo;
+}
+
+@Html.Partial("Stats/_Header", Model)
+
+<div id="stat-interviewers" class="grid">
+    @Html.Action("SelectInterviewers", new { dateFrom = dateFrom, dateTo = dateTo })
+</div>
+
+@Html.Partial("Stats/_Body",Model)

@@ -1,0 +1,13 @@
+﻿@model double
+@{
+    var emptyStars = (int)Math.Round(5 - Model);
+    var fullStars = 5 - emptyStars;
+}
+@for (var i = 0; i < fullStars; i++)
+{
+    <i class="glyphicon glyphicon-star"></i>
+}
+@for (var i = 0; i < emptyStars; i++)
+{
+    <i class="glyphicon glyphicon-star-empty"></i>
+}

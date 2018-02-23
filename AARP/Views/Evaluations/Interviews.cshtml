@@ -1,0 +1,208 @@
+﻿@model AARP.Models.Evaluations.InterviewsViewModel
+@{
+    Layout = "~/Views/Shared/_EvaluationsLayout.cshtml";
+    ViewBag.Title = "Evaluations";
+    
+    var currentDate = DateTime.Now;
+    var filters = new InterviewsFiltersViewModel();
+    if (ViewBag.interviewFilters != null)
+    {
+        filters = (InterviewsFiltersViewModel)ViewBag.interviewFilters;
+    }
+    else
+    {
+        filters = AARP.Logic.EvaluationInterviews.GetAllInterviewsFilters();
+    }
+}
+
+<div class="row stats">
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <h2>@Html.Partial("_PreviousPage")All Interviews @Html.Partial("_SharePage")@Html.Partial("_PrintPdf")</h2>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        @Html.Partial("_SearchField")
+    </div>
+</div>
+<br />
+
+@Html.Partial("_Common/_Message")
+
+
+@Html.Partial("Interviews/_Grid")
+
+<div class="row">
+    <div class="container" id="filtersCheckboxes">
+        @using (Html.BeginForm("Interviews", "Evaluations", FormMethod.Post, new { id = "filterForm" }))
+        {
+            <div class="col-lg-1"></div>
+            <div class="col-lg-4">
+                <h4>Interview Stage</h4>
+                @foreach (var stage in filters.StageFilter)
+                {
+                    <div class="input-group-lg">
+                        <label><input type="checkbox" checked="checked" class="checkbox-inline chkStage btn-primary" id="@string.Format("chk-Stage{0}",stage.Key.Id.ToString().Trim())" name="@string.Format("chk-Stage{0}",stage.Key.Id.ToString().Trim())" value="@stage.Key.Id">Tech Interview @stage.Key.Stage</label>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4">
+                <h4>Interview Stage</h4>
+
+                @foreach (var seniority in filters.SeniorityFilter)
+                {
+                    <div class="input-group-lg">
+                        <label><input type="checkbox" checked="checked" class="checkbox-inline chkStage btn-primary" id="@string.Format("chk-Seniority{0}",seniority.Key.Id.ToString().Trim())" name="@string.Format("chk-Seniority{0}", seniority.Key.Id.ToString().Trim())" value="@seniority.Key.Id.ToString().Trim()">@seniority.Key.SeniorityName</label>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-3">
+                <h4>Dates</h4>
+                @Html.Partial("_DateRangeFilter")
+            </div>
+        }
+        <div class="col-lg-5">
+
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="container">
+        <table class="table table-striped" id="interviewsTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Interviewer</th>
+                    <th>Date of Interview</th>
+                    <th>Interviewee</th>
+                    <th>Interview Stage</th>
+                    <th>Seniority</th>
+                    <th>Status</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var interview in Model.Interviews)
+                {
+                    var ratings = "";
+                    for(var i = 0; i < 5; i++)
+                    {
+                        if (interview.Rating > i)
+                        {
+                            ratings += string.Format(@"<i class=""glyphicon glyphicon-star""></i>");
+                        }
+                        else
+                        {
+                            ratings += string.Format(@"<i class=""glyphicon glyphicon-star-empty""></i>");
+                        }
+                    }
+                    <tr>
+                        <td></td>
+                        <td>@interview.Interviewer</td>
+                        <td>@interview.InterviewDate</td>
+                        <td><a href="Interviewee/@interview.IntervieweeID">@interview.Interviewee</a></td>
+                        <td>@interview.InterviewStage</td>
+                        <td>@interview.Seniority</td>
+                        <td>@interview.InterviewStatus</td>
+                        <td>@interview.Rating @Html.Raw(ratings)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        var interviewerProfile = interviewerProfile || {};
+        interviewerProfile.setFeedbackTemplate('@Html.Raw(Html.Partial("Interviews/_Feedback").ToString().Replace("\r\n", ""))');
+
+    </script>
+    <script type="text/javascript">
+
+        var constants = {
+            dateFrom: 'date-from',
+            dateTo: 'date-to',
+            applyBtn: 'filterStat',
+            statGrid: 'stat-interviewers'
+        };
+
+        $(document).ready(function () {
+            var currentDate = new Date(@(currentDate.Year), @(currentDate.Month - 1), @(currentDate.Day));
+            var fromDate = new Date(currentDate);
+            fromDate.setDate(fromDate.getDate() - 30);
+            $('.date-filter-input').datepicker({maxDate: 0});
+
+            $('.' + constants.dateTo).datepicker('setDate', currentDate);
+            $('.' + constants.dateFrom).datepicker('setDate', fromDate);
+
+            dataTable = $('#interviewsTable').DataTable();
+
+
+            $("#filterForm input:checkbox, #filterForm input[type='text']").on("change", function () {
+                var selectedStages = [];
+                var selectedSeniorities = [];
+                $('#filtersCheckboxes input:checked').each(function () {
+
+                    var checkName = $(this).attr('name');
+                    if (checkName.includes('Stage')) {
+                        selectedStages.push($(this).val());
+                    }
+                    else {
+                        selectedSeniorities.push($(this).val());
+                    }
+                });
+
+                var filters = {
+                    selectedstages: selectedStages,
+                    selectedseniorities: selectedSeniorities,
+                    dateFrom: $('#filterForm .' + constants.dateFrom).val(),
+                    dateTo: $('#filterForm .' + constants.dateTo).val(),
+                };
+
+                $.ajax({
+                    url: '/Evaluations/Interviews',
+                    data: JSON.stringify(filters),
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        var table = $('#interviewsTable').DataTable();
+                        table.destroy();
+                        $('#interviewsTable tbody').html(data);
+                        table = $('#interviewsTable').DataTable();
+                    },
+                });
+            });
+        });
+
+        //$('#' + constants.applyBtn).click(function () {
+
+        //    var dateFrom = $('#' + constants.dateFrom).val();
+        //    var dateTo = $('#' + constants.dateTo).val();
+
+        //    $.ajax({
+        //        url: 'selectinterviewers',
+        //        data: { dateFrom: dateFrom, dateTo: dateTo},
+        //        type: 'get',
+        //        success: function (data) {
+        //            $('#' + constants.statGrid).html(data);
+        //            console.log(data);
+        //        }
+        //    });
+        //});
+
+        function InitializeDataTable()
+        {
+            alert('Willreload');
+            var table = $('#interviewsTable').DataTable();
+
+            table.draw();
+        }
+    </script>
+}

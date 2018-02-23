@@ -1,0 +1,19 @@
+﻿@model AARP.Services.Emails.TimeOutApplicationEscalationEmail
+
+@{
+    var reviewUrl = string.Format("https://scopicsoftware.recruiterbox.com/app/#candidates/list/all/view:{0}/", @Model.JobApplication.CandidateId);
+}
+
+To: @Model.EscalationTo
+From: internal@scopicsoftware.com
+Subject: Applicant review escalation - @Model.JobApplication.JobName
+
+Hello,
+
+This email is to let you know that the reviewer @Model.Reviewer.Name (@Model.Reviewer.Email) has not reviewed this applicant as requested after being sent @(Model.JobApplication.RemindCount + 1) email(s). Please contact the reviewer to discuss.
+
+To get access to the candidate's CV, please click on the link below:
+
+@reviewUrl
+
+Please don’t reply to this email.

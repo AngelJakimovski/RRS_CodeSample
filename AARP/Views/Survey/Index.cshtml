@@ -1,0 +1,135 @@
+﻿@model AARP.Models.SurveyViewModel
+
+@{
+    ViewBag.Title = "Survey";
+}
+
+<h2>We appreciate your opinion</h2>
+
+@using (Html.BeginForm("Save", "Survey", FormMethod.Post, new { id="survey-form"}))
+{
+    @Html.HiddenFor(h=>h.Id)
+    @Html.HiddenFor(h => h.RatingId)
+
+    <div class="form-horizontal">
+        <h4>Your feedback on Tech interview</h4>
+        <hr />
+        <p>
+            Dear Candidate,
+        </p>
+        <p>
+            Thank you for dedicating time for the interview. Blah, blah, ...
+        </p>
+        <hr />
+
+        <div class="survey">
+            <div class="form-group">
+                @Html.LabelFor(model => model.RatingId, htmlAttributes: new { @class = "control-label tal-left col-md-2 col-sm-3 col-xs-6" })
+                <div class="rating col-md-2 col-xs-6 tal-left">
+                    <i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i><i class="glyphicon glyphicon-star-empty"></i>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.InterviewerAttitude, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-5">
+                    <p class="survey-variant">
+                        <input type="radio" value="Positive" name="InterviewerAttitude" id="attitude-pos" /><label for="attitude-pos">Positive</label>
+                    </p>
+                    <p class="survey-variant">
+                        <input type="radio" value="Neutral" name="InterviewerAttitude" id="attitude-neu" /><label for="attitude-neu">Neutral</label>
+                    </p>
+                    <p class="survey-variant">
+                        <input type="radio" value="Negative" name="InterviewerAttitude" id="attitude-neg" /><label for="attitude-neg">Negative</label>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TestTask, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-5">
+                    <p class="survey-variant">
+                        <input type="radio" value="true" name="TestTask" id="task-yes" /><label for="task-yes">Yes</label>
+                    </p>
+                    <p class="survey-variant">
+                        <input type="radio" value="false" name="TestTask" id="task-no" /><label for="task-no">No</label>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TaskDifficultyLevel, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-5">
+                    <p class="survey-variant">
+                        <input type="radio" value="easy" name="TaskDifficultyLevel" id="dif-easy" /><label for="dif-easy">Task was easy</label>
+                    </p>
+                    <p class="survey-variant">
+                        <input type="radio" value="medium" name="TaskDifficultyLevel" id="dif-medium" /><label for="dif-medium">Task was of medium difficulty</label>
+                    </p>
+                    <p class="survey-variant">
+                        <input type="radio" value="hard" name="TaskDifficultyLevel" id="dif-complex" /><label for="dif-complex">Task was very hard/complex</label>
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.InterviewLengthId, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-5">
+                    @foreach (var length in (IEnumerable<InterviewLength>)ViewBag.InterviewLengths)
+                    {
+                        <p class="survey-variant">
+                            <input type="radio" value="@length.Id" name="InterviewLengthId" id="length-@length.Id" /><label for="length-@length.Id">@length.Length</label>
+                        </p>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NoteFromInterviewee, htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-5">
+                    @Html.TextAreaFor(model => model.NoteFromInterviewee, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Send" id="save-survey" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+@section scripts{
+    
+    <script type="text/javascript">
+        $(".rating>i").click(function () {
+            $('.rating i').removeClass('active');
+            $(this).addClass("active");
+            $("#RatingId").val(5 - $(this).index());
+        });
+
+        $('#save-survey').click(function () {
+            if ($("#RatingId").val() != "0") {
+                $("#survey-form").submit();
+            }
+            else alert("Please, set rating.");
+        });
+
+        $("#survey-form").submit(function (e) {
+            $.ajax({
+                type: "POST",
+                url: '/survey/save',
+                data: $("#survey-form").serialize(), 
+                success: function (data) {
+                    $("#survey-form").html(data);
+                }
+            });
+
+            e.preventDefault(); 
+        });
+    </script>
+
+    }

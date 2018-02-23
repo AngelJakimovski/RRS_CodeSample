@@ -1,0 +1,261 @@
+﻿@model IEnumerable<AARP.Models.JobPositionType>
+
+@{
+    ViewBag.Title = "Job Position Types";
+    //var reviewers = ViewData["Reviewers"] as List<AARP.DAL.Reviewer>;
+}
+
+<h2>@Html.Partial("_PreviousPage")Position Types</h2>
+
+<p>
+    <button class="btn btn-default" data-toggle="modal" data-target="#modal-add">Add New</button>
+</p>
+
+
+<table id="table-jobCatgs" class="table">
+    <tr>
+        <th class="col-md-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th class="col-md-6">
+            Reviewers
+        </th>
+        <th class="col-md-2"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="data-row" data-id="@item.Id" data-name="@item.Name">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Interviewers)
+            </td>
+            <td>
+                <button class="btn btn-sm btn-primary btn-edit" data-toggle="modal" data-target="#modal-edit">Edit</button>
+                <button class="btn btn-sm btn-danger btn-delete">Delete</button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div id="modal-edit" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Position Type</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" id="id" value="" />
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Description</label>
+                        <textarea class="form-control" id="description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Reviewers</label>
+                        <input id="reviewers" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-submit">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="modal-add" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add Position Type</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Description</label>
+                        <textarea class="form-control" id="description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Reviewers</label>
+                        <input class="form-control" id="reviewers" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-submit">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@section scripts{
+    <script>
+        var modalEdit = $('#modal-edit');
+        var modalAdd = $('#modal-add');
+        var selectedReviewers = [];
+        var reviewers = [];
+
+        var getReviewersData = function () {
+            $.getJSON('@Url.Action("Get","Reviewer")', function (data) {
+                reviewers = data;
+                initMagicSuggest();
+            })
+        };
+
+        var initMagicSuggest = function () {
+            //initiate the suggest for add-form
+            addFormSuggest = $('#modal-add #reviewers').magicSuggest({
+                placeholder: 'Select reviewers',
+                data: reviewers,
+                valueField: 'Email',
+                displayField: 'Email',
+                renderer: function (data) {
+                    return data.Name + ' (<b>' + data.Email + '</b>)';
+                },
+                selectionStacked: true,
+                allowFreeEntries: false,
+                allowDuplicates: false,
+            });
+
+
+
+            editFormSuggest = $('#modal-edit #reviewers').magicSuggest({
+                placeholder: 'Select reviewers',
+                data: reviewers,
+                valueField: 'Email',
+                displayField: 'Email',
+                renderer: function (data) {
+                    return data.Name + ' (<b>' + data.Email + '</b>)';
+                },
+                selectionStacked: true,
+                allowFreeEntries: false,
+                allowDuplicates: false,
+            });
+        };
+
+        (function () {
+            getReviewersData();
+        })();
+
+        //$('.data-row .btn-edit').click(function () {
+        //    modalEdit.modal();
+        //});
+
+        $('.data-row .btn-delete').click(function () {
+            var catgId = $(this).parents('.data-row').attr('data-id');
+            var catgName = $(this).parents('.data-row').attr('data-name');
+            var r = confirm('Do you really want to delete the job category: ' + catgName + '?');
+            if (r === true) {
+                $.post('@Url.Action("Delete","PositionType")' + '/' + catgId)
+                    .done(function () {
+                        $('#table-jobCatgs tr[data-id=' + catgId + ']').remove();
+                    })
+                    .fail(function () {
+                        alert("Some errors occurred. Try again later...");
+                    });
+            }
+        });
+
+        $('#modal-edit').on('show.bs.modal', function (event) {
+            var modal = $(this)
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var jobCatgId = $(button).parents('tr').data('id');
+            var jobCatg = {};
+
+            $.get('@Url.Action("Get","PositionType")' + '/' + jobCatgId).done(function (data) {
+                jobCatg = data;
+
+                modal.find('.modal-title').text(jobCatg.Name);
+                modal.find('.modal-body input#id').val(jobCatg.Id);
+                modal.find('.modal-body input#name').val(jobCatg.Name);
+                modal.find('.modal-body textarea#description').val(jobCatg.Description);
+
+                var emails = $.map(jobCatg.Interviewers.split(/[,;]+/), $.trim);
+                console.log(emails);
+                editFormSuggest.setValue(emails);
+            });
+        })
+
+        $('#modal-add .btn-submit').click(function () {
+            jobCatg = {};
+            jobCatg.Name = modalAdd.find('#name').val();
+            jobCatg.Description = modalAdd.find('#description').val();
+            jobCatg.Interviewers = addFormSuggest.getValue().join(', ');
+
+            $.post('@Url.Action("Create","PositionType")', { jobCatg: jobCatg })
+                .done(function (data) {
+                    var table = document.getElementById('table-jobCatgs');
+                    var newRow = table.insertRow(1);
+                    var cell1 = newRow.insertCell(0);
+                    var cell2 = newRow.insertCell(1);
+                    var cell3 = newRow.insertCell(2);
+                    var cell4 = newRow.insertCell(3);
+
+                    $(newRow).attr('data-id', data.Id);
+                    $(newRow).attr('data-name', data.Name);
+                    $(newRow).addClass('data-row');
+
+                    cell1.innerHTML = data.Name;
+                    cell2.innerHTML = data.Description;
+                    cell3.innerHTML = data.Interviewers;
+                    cell4.innerHTML = '<button class="btn btn-primary btn-edit" data-toggle="modal" data-target="#modal-edit">Edit</button><button class="btn btn-danger btn-delete">Delete</button>';
+
+                    $('#modal-add').modal('toggle');
+                    modalAdd.find('#name').val('');
+                    modalAdd.find('#description').val('');
+                    addFormSuggest.clear();
+                })
+                .fail(function (err) {
+                    alert("Some errors occurred. Try again later...");
+                });
+        });
+
+        $('#modal-edit .btn-submit').click(function () {
+            jobCatg = {};
+            jobCatg.Id = modalEdit.find('#id').val();
+            jobCatg.Name = modalEdit.find('#name').val();
+            jobCatg.Description = modalEdit.find('#description').val();
+            jobCatg.Interviewers = editFormSuggest.getValue().join(', ');
+
+            $.post('@Url.Action("Edit", "PositionType")', { jobCatg: jobCatg })
+            .done(function (data) {
+                var row2Edit = $('#table-jobCatgs tr[data-id=' + data.Id + ']');
+                var cells = $(row2Edit).children('td');
+                $(row2Edit).attr('data-name', data.Name);
+                cells[0].innerHTML = data.Name;
+                cells[1].innerHTML = data.Description;
+                cells[2].innerHTML = data.Interviewers;
+
+                $(modalEdit).modal('toggle');
+            })
+            .fail(function () {
+                alert("Some errors occurred. Try again later...");
+                $(modalEdit).modal('toggle');
+            });
+        });
+    </script>
+}

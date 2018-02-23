@@ -1,0 +1,38 @@
+﻿@model AARP.Services.Emails.RemindReviewApplicationEmail
+@{
+    var reviewUrl = string.Format("https://scopicsoftware.recruiterbox.com/app/#candidates/list/all/view:{0}/", @Model.JobApplication.CandidateId);
+    var noticeCount = @Model.JobApplication.RemindCount + 1;
+  
+}
+
+@helper  NumberToStr(int number){
+    if (number == 1) 
+    { 
+        @String.Format("1st")
+    }else if(number == 2)
+    {
+        @String.Format("2nd")
+    }else if(number == 3)
+    {
+        @String.Format("3rd")
+    }
+    else
+    {
+        @String.Format("{0}th", number)
+    }
+                                            
+}
+
+To: @Model.Reviewer.Email
+From: internal@scopicsoftware.com
+Subject: Applicant review needed - @Model.Job.Name - @NumberToStr(Model.JobApplication.RemindCount + 1) notice - 
+
+Hello @Model.Reviewer.Name,
+
+We need you to review a new applicant for this job - "@Model.Job.Name". Click on the link below to get access to the candidate's CV.
+
+After reviewing the candidate's CV either advance the applicant to the next stage or reject the applicant.
+
+@reviewUrl
+
+Please don’t reply to this email.

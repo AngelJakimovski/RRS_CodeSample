@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AARP.Models.EvaluationsViewModel>
+
+@{
+    Layout = "~/Views/Shared/_EvaluationsLayout.cshtml";
+    ViewBag.Title = "Evaluations";
+    var message = TempData["Message"] as AARP.Models.MessageViewModel;
+    var currentDate = DateTime.Now;
+}
+<div class="row standings">
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <h2>@Html.Partial("_PreviousPage")Standings @Html.Partial("_SharePage")@Html.Partial("_PrintPdf")</h2>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        @Html.Partial("_SearchField")
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12 date-filter">
+        @Html.Partial("_DateRangeFilter")
+        <input type="button" value="Change" class="btn-action" />
+    </div>
+</div>
+<div id="standings-info">
+    @Html.Partial("_StandingsInterviewers", (IEnumerable<StandingsInterviewersViewModel>)ViewBag.InterviewerStandings)
+</div>
+@*<p>
+        <a id="btn-update" class="btn btn-primary" href="javascript:void()">Update Applicants</a>
+    </p>*@
+
+@if (message != null)
+{
+    <div class='alert @(message.Type== AARP.Models.MessageType.Success?"alert-success":"alert-info") alert-dismissible fade in' role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <strong>@message.Title !</strong> @message.Content
+    </div>
+}
+
+@section scripts{
+    <script src="~/Scripts/Evaluations/CompareLogic.js"></script>
+
+    <script type="text/javascript">
+
+        $(function() {
+            CompareLogic.init();
+        });
+
+        var constants = {
+            dateFrom: 'date-from',
+            dateTo: 'date-to',
+        };
+
+        $(document).ready(function () {
+            var currentDate = new Date(@(currentDate.Year), @(currentDate.Month - 1), @(currentDate.Day));
+            var fromDate = new Date(currentDate);
+            fromDate.setDate(fromDate.getDate() - 30);
+            $('.date-filter-input').datepicker({maxDate: 0});
+
+            $('#' + constants.dateTo).datepicker('setDate', currentDate);
+            $('#' + constants.dateFrom).datepicker('setDate', fromDate);
+        });
+
+    </script>
+    
+    }

@@ -1,0 +1,10 @@
+﻿@model IEnumerable<AARP.Models.Evaluations.StandingsInterviewRatingViewModel>
+
+<div class="row">
+    @for (var i = 5; i >= 1; i--)
+    {
+        <div class="col-md-2">
+            @Html.Partial("_RatingStars", (double)i)
+        </div>
+    }
+</div>

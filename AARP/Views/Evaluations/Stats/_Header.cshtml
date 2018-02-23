@@ -1,0 +1,86 @@
+﻿@model AARP.Models.Evaluations.StatsViewModel
+@{
+
+    var dateFrom = (DateTime)ViewBag.DateFrom;
+    var dateTo = (DateTime)ViewBag.DateTo;
+}
+
+<div id="header">
+    <div class="alert" role="alert" style="background-color:lightgray;color:black">
+        <div class="row">
+            <div class="col-lg-2 text-center">
+                <h4>Average Interview Rating</h4>
+            </div>
+            <div class="col-lg-2 text-center">
+                <h4>Total number of Interviews</h4>
+            </div>
+            <div class="col-lg-2 text-center">
+                <h4>Interview 1</h4>
+            </div>
+            <div class="col-lg-2 text-center">
+                <h4>Interview 2</h4>
+            </div>
+            <div class="col-lg-2 text-center">
+                <h4>Total number of Interviewers</h4>
+            </div>
+            <div class="col-lg-2 text-center">
+                <h4>​​​​​​​General Impression about attitude</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 text-center">
+                <h3 style="display:inline">@Model.header.AverageInterviewRating</h3>
+                @{
+                    for (int i = 1; i <= @Model.header.AverageInterviewRating; i++)
+                    {
+                        <i class="fa fa-star glyphicon-align-center"></i>
+                    }
+                    if (@Model.header.AverageInterviewRating % 10 > 0)
+                    {
+                        <i class="fa fa-star-half-full"></i>
+                    }
+                }
+            </div>
+            <div class="col-lg-2 text-center">
+                <h3 style="display:inline">@Model.header.TotalNumberOfInterviews</h3>
+            </div>
+            <div class="col-lg-2 text-center">
+                <h3 style="display:inline">@Model.header.TotalInterview1</h3>
+            </div>
+            <div class="col-lg-2 text-center">
+                <h3 style="display:inline">@Model.header.TotalInterview2</h3>
+            </div>
+            <div class="col-lg-2 text-center">
+                <h3 style="display:inline">@Model.header.TotalInterviewers</h3>
+            </div>
+            <div class="col-lg-2 text-center">
+                <canvas id="barChart"></canvas>
+                <script src="~/Scripts/Chart.js"></script>
+                <script src="~/Scripts/Site.js"></script>
+                <script>
+                    //-----Single Bar --------------
+                    var c = document.getElementById("barChart");
+                    var ctx = c.getContext("2d");
+
+                    var myBarChart = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: @(Html.Raw(JsonConvert.SerializeObject(ViewBag.StatsHeaderBarChartData))),
+                        options: {
+                            legend: { display: false },
+                            title: { display: false },
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+
+            </div>
+        </div>
+
+    </div>
+</div>
